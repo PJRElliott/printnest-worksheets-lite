@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trace and Write"
+  short_description: "Generate ten-strip CVC tracing worksheets"
+  default_prompt: "Use $trace-and-write to create a printable CVC word-family tracing worksheet."
