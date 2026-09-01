@@ -85,6 +85,17 @@
           "${workspaceFolder}\\outputs\\trace-and-write\\short_u_trace_and_write.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Phase 2 SATPIN Word Bank",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_satpin_word_bank.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\phonics\\phase_2_satpin_word_bank.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }

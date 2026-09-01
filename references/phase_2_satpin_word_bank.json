@@ -1,0 +1,14 @@
+{
+  "graphemes": ["s", "a", "t", "p", "i", "n"],
+  "official_regular": [
+    "at", "sat", "pat", "tap", "sap", "it", "sit", "pit", "tip", "pip",
+    "sip", "an", "in", "nip", "pan", "pin", "tin", "tan", "nap"
+  ],
+  "pronunciation_attention": ["a", "as", "is"],
+  "additional_cvc": ["nit", "sin", "tat"],
+  "adjacent_consonant_extension": [
+    "ant", "its", "pant", "snap", "snip", "span", "spin", "spit", "tint"
+  ],
+  "longer_extension": ["satin"],
+  "source": "Letters and Sounds: Principles and Practice of High Quality Phonics, Phase Two, page 69"
+}
