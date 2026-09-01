@@ -31,8 +31,8 @@ SKILL_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_BASE = Path.home() / "Desktop" / "PrintNest"
 PAGE_W, PAGE_H = A4
 MARGIN = 0.5 * inch
-CONTENT_TOP = PAGE_H - 0.75 * inch
-CONTENT_BOTTOM = 0.75 * inch
+CONTENT_TOP = PAGE_H - 1.0 * inch
+CONTENT_BOTTOM = 0.5 * inch
 CONTENT_LEFT = MARGIN
 CONTENT_RIGHT = PAGE_W - MARGIN
 
