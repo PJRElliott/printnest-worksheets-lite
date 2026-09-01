@@ -13,7 +13,7 @@ python scripts/generate_trace_and_write.py
 
 - Use `--family at` to create one word-family page, or omit it to create all 12 pages.
 - Use `--output <path.pdf>` when the user specifies an output location.
-- Preserve the bundled full-page template and League Spartan fonts unless the user explicitly requests a design change.
+- Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu AU VIC WA NT Pre only for the grey tracing words.
 - Keep ten unnumbered strips on every page, repeating family words as needed.
 - Preserve the established layout: 0.5-inch left, right, and bottom margins; 1-inch top margin; 0.35-inch clear gap between strips; and two tracing examples followed by writing space.
 - Open or render the generated PDF when visual verification is relevant.
