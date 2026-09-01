@@ -18,11 +18,9 @@ import sys
 from pathlib import Path
 
 try:
-    from PIL import Image
     from reportlab.lib.colors import black, Color, white
-    from reportlab.lib.pagesizes import letter
+    from reportlab.lib.pagesizes import A4
     from reportlab.lib.units import inch
-    from reportlab.lib.utils import ImageReader
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.pdfgen import canvas
@@ -31,8 +29,8 @@ except ImportError:
 
 SKILL_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_BASE = Path.home() / "Desktop" / "PrintNest"
-PAGE_W, PAGE_H = letter
-MARGIN = 0.6 * inch
+PAGE_W, PAGE_H = A4
+MARGIN = 0.75 * inch
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -46,8 +44,7 @@ SOFT_BLUE = white
 DARK = BLACK
 
 FONT_DIR = SKILL_DIR / "assets" / "fonts"
-FOOTER_IMAGE = SKILL_DIR / "assets" / "images" / "portrait-footer.png"
-BANNER_IMAGE = SKILL_DIR / "assets" / "images" / "portrait-banner.png"
+PAGE_TEMPLATE = SKILL_DIR / "assets" / "images" / "portrait-page-template.png"
 FONTS = {
     "LeagueSpartan-Regular": "LeagueSpartan-Regular.ttf",
     "LeagueSpartan-SemiBold": "LeagueSpartan-SemiBold.ttf",
@@ -85,28 +82,12 @@ def load_meta(book: str) -> dict:
 
 def draw_header(c, title: str = "", subtitle: str = "") -> None:
     c.drawImage(
-        str(BANNER_IMAGE),
-        0,
-        PAGE_H - 0.16 * inch,
-        width=PAGE_W,
-        height=0.16 * inch,
-        mask="auto",
+        str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto"
     )
 
 
 def draw_footer(c, page_num: int) -> None:
-    with Image.open(FOOTER_IMAGE) as source:
-        artwork = source.crop(source.getbbox())
-        width = PAGE_W
-        height = width * artwork.height / artwork.width
-        c.drawImage(
-            ImageReader(artwork),
-            0,
-            0.12 * inch,
-            width=width,
-            height=height,
-            mask="auto",
-        )
+    return None
 
 
 def draw_4line(c, x_left, x_right, baseline_y, gap=0.28 * inch) -> None:
@@ -132,11 +113,6 @@ def draw_4line(c, x_left, x_right, baseline_y, gap=0.28 * inch) -> None:
 
 def page_cover(c, meta: dict) -> None:
     draw_header(c)
-    c.setFillColor(SOFT_PURPLE)
-    c.rect(0, PAGE_H - 1.3 * inch, PAGE_W, 1.3 * inch, fill=1, stroke=0)
-    c.setFillColor(SOFT_YELLOW)
-    c.rect(0, 0, PAGE_W, 1.3 * inch, fill=1, stroke=0)
-
     c.setFillColor(DARK)
     c.setFont("LeagueSpartan-ExtraBold", 54)
     c.drawCentredString(PAGE_W / 2, PAGE_H - 2.4 * inch, "Phonics")
@@ -411,7 +387,7 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     output_pdf = out_dir / f"{args.book}_workbook.pdf"
 
-    c = canvas.Canvas(str(output_pdf), pagesize=letter)
+    c = canvas.Canvas(str(output_pdf), pagesize=A4)
     page_num = 0
     page_cover(c, meta); page_num += 1
     page_copyright(c, meta); page_num += 1
