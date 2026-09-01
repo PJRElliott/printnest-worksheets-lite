@@ -73,6 +73,7 @@ def draw_heading(
     first_strip_top: float,
     family: str | None = None,
     title_override: str | None = None,
+    instruction_override: str | None = None,
 ) -> None:
     title_font = "LeagueSpartan-Bold"
     instruction_font = "LeagueSpartan-Regular"
@@ -104,7 +105,8 @@ def draw_heading(
     pdf.drawString(
         CONTENT_LEFT,
         instruction_y,
-        "Trace each word twice, then write it on your own.",
+        instruction_override
+        or "Trace each word twice, then write it on your own.",
     )
 
 

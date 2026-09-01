@@ -125,6 +125,17 @@
           "${workspaceFolder}\\scripts\\generate_phase3_trace_and_write.py"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Alphabet Trace and Write",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_alphabet_trace_and_write.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\alphabet\\alphabet_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }
