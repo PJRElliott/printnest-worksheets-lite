@@ -287,8 +287,13 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
         word = words[i % len(words)]
         c.setFillColor(TRACE_GRAY)
         c.setFont("LeagueSpartan-Bold", 34)
-        c.drawString(MARGIN + 0.2 * inch, baseline_y + 0.04 * inch, word)
-        c.drawString(MARGIN + 2.0 * inch, baseline_y + 0.04 * inch, word)
+        first_word_x = MARGIN + 0.2 * inch
+        old_second_word_x = MARGIN + 2.0 * inch
+        first_word_width = pdfmetrics.stringWidth(word, "LeagueSpartan-Bold", 34)
+        old_gap = old_second_word_x - first_word_x - first_word_width
+        second_word_x = first_word_x + first_word_width + old_gap * 0.75
+        c.drawString(first_word_x, baseline_y + 0.04 * inch, word)
+        c.drawString(second_word_x, baseline_y + 0.04 * inch, word)
         # 残りは空白（自由に書く）
 
     draw_footer(c, page_num)
