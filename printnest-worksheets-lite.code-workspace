@@ -107,6 +107,24 @@
           "${workspaceFolder}\\outputs\\phonics\\phase_2_satpin_trace_and_write.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate All Phase 3 Set Word Banks",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_phase3_word_bank.py"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Generate All Phase 3 Set Trace and Write PDFs",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_phase3_trace_and_write.py"
+        ],
+        "problemMatcher": []
       }
     ]
   }

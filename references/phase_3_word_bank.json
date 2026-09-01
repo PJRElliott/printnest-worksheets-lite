@@ -1,0 +1,54 @@
+{
+  "graphemes": [
+    "j", "v", "w", "x", "y", "z", "zz", "qu", "ch", "sh", "th", "ng",
+    "ai", "ee", "igh", "oa", "oo", "ar", "or", "ur", "ow", "oi", "ear",
+    "air", "ure", "er"
+  ],
+  "sections": [
+    {"title": "j Words", "grapheme": "j", "words": ["jam", "jet", "jog", "jet-lag", "jacket"]},
+    {"title": "v Words", "grapheme": "v", "words": ["van", "vat", "vet", "visit", "velvet"]},
+    {"title": "w Words", "grapheme": "w", "words": ["will", "win", "wag", "web", "wig", "wax", "cobweb", "wicked"]},
+    {"title": "x Words", "grapheme": "x", "words": ["mix", "fix", "box", "tax", "six", "taxi", "vixen", "exit"]},
+    {"title": "y Words", "grapheme": "y", "words": ["yap", "yes", "yet", "yell", "yum-yum"]},
+    {"title": "z and zz Words", "grapheme": "z, zz", "words": ["zip", "buzz", "jazz", "zigzag"]},
+    {"title": "qu Words", "grapheme": "qu", "words": ["quiz", "quit", "quick", "quack", "liquid"]},
+    {"title": "ch Words", "grapheme": "ch", "words": ["chop", "chin", "chug", "check", "such", "chip", "chill", "much", "rich", "chicken"]},
+    {"title": "sh Words", "grapheme": "sh", "words": ["ship", "shop", "shed", "shell", "fish", "shock", "cash", "bash", "hush", "rush"]},
+    {"title": "th Words", "grapheme": "th", "words": ["them", "then", "that", "this", "with", "moth", "thin", "thick", "path", "bath"]},
+    {"title": "ng Words", "grapheme": "ng", "words": ["ring", "rang", "hang", "song", "wing", "rung", "king", "long", "sing", "ping-pong"]},
+    {"title": "ai Words", "grapheme": "ai", "words": ["wait", "hail", "pain", "aim", "sail", "main", "tail", "rain", "bait"]},
+    {"title": "ee Words", "grapheme": "ee", "words": ["see", "feel", "weep", "feet", "jeep", "seem", "meet", "week", "deep", "keep"]},
+    {"title": "igh Words", "grapheme": "igh", "words": ["high", "sigh", "light", "might", "night", "right", "sight", "fight", "tight", "tonight"]},
+    {"title": "oa Words", "grapheme": "oa", "words": ["coat", "load", "goat", "loaf", "road", "soap", "oak", "toad", "foal", "boatman"]},
+    {"title": "Long oo Words", "grapheme": "oo", "words": ["too", "zoo", "boot", "hoof", "zoom", "cool", "food", "root", "moon", "rooftop"]},
+    {"title": "Short oo Words", "grapheme": "oo", "words": ["look", "foot", "cook", "good", "book", "took", "wood", "wool", "hook", "hood"]},
+    {"title": "ar Words", "grapheme": "ar", "words": ["bar", "car", "bark", "card", "cart", "hard", "jar", "park", "market", "farmyard"]},
+    {"title": "or Words", "grapheme": "or", "words": ["for", "fork", "cord", "cork", "sort", "born", "worn", "fort", "torn", "cornet"]},
+    {"title": "ur Words", "grapheme": "ur", "words": ["fur", "burn", "urn", "burp", "curl", "hurt", "surf", "turn", "turnip", "curds"]},
+    {"title": "ow Words", "grapheme": "ow", "words": ["now", "down", "owl", "cow", "how", "bow", "pow", "row", "town", "towel"]},
+    {"title": "oi Words", "grapheme": "oi", "words": ["oil", "boil", "coin", "coil", "join", "soil", "toil", "quoit", "poison", "tinfoil"]},
+    {"title": "ear Words", "grapheme": "ear", "words": ["ear", "dear", "fear", "hear", "gear", "near", "tear", "year", "rear", "beard"]},
+    {"title": "air Words", "grapheme": "air", "words": ["air", "fair", "hair", "lair", "pair", "cairn"]},
+    {"title": "ure Words", "grapheme": "ure", "words": ["sure", "lure", "assure", "insure", "pure", "cure", "secure", "manure", "mature"]},
+    {"title": "er Words", "grapheme": "er", "words": ["hammer", "letter", "rocker", "ladder", "supper", "dinner", "boxer", "better", "summer", "banner"]},
+    {"title": "Mixed Phase 3 Words", "grapheme": "mixed", "words": [
+      "cheep", "tooth", "chair", "sharp", "torch", "looking", "sheet", "harsh",
+      "waiter", "poach", "orchard", "powder", "thing", "short", "arch", "shoal",
+      "north", "lightning", "thorn", "church", "chain", "shook", "farmer", "porch",
+      "teeth", "singer", "faith", "shark", "shorter", "thicker", "coach", "shear",
+      "sheep", "march", "longer"
+    ]}
+  ],
+  "sets": [
+    {"id": "set_6", "title": "Phase 3 Set 6", "sections": ["j Words", "v Words", "w Words", "x Words"]},
+    {"id": "set_7", "title": "Phase 3 Set 7", "sections": ["y Words", "z and zz Words", "qu Words"]},
+    {"id": "consonant_digraphs", "title": "Phase 3 Consonant Digraphs", "sections": ["ch Words", "sh Words", "th Words", "ng Words"]},
+    {"id": "vowel_set_1", "title": "Phase 3 Vowel Set 1", "sections": ["ai Words", "ee Words", "igh Words", "oa Words"]},
+    {"id": "vowel_set_2", "title": "Phase 3 Vowel Set 2", "sections": ["Long oo Words", "Short oo Words", "ar Words", "or Words", "ur Words"]},
+    {"id": "vowel_set_3", "title": "Phase 3 Vowel Set 3", "sections": ["ow Words", "oi Words", "ear Words", "air Words"]},
+    {"id": "vowel_set_4", "title": "Phase 3 Vowel Set 4", "sections": ["ure Words", "er Words"]},
+    {"id": "mixed_extension", "title": "Phase 3 Mixed Extension", "sections": ["Mixed Phase 3 Words"]}
+  ],
+  "excluded_proper_names": ["Jill", "Jack", "Jen", "Vic", "Ravi", "Kevin", "Zak", "Gail"],
+  "source": "Letters and Sounds: Principles and Practice of High Quality Phonics, Phase Three, pages 100-103"
+}
