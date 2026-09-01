@@ -141,7 +141,7 @@ def draw_page(pdf: canvas.Canvas, family: str, words: list[str]) -> None:
         old_second_x = CONTENT_LEFT + 2.0 * inch
         width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
         old_gap = old_second_x - first_x - width
-        minimum_gap = 0.35 * inch if "-" in word else 0
+        minimum_gap = 0.35 * inch if "-" in word else 0.18 * inch
         second_x = first_x + width + max(
             old_gap * TRACE_WORD_GAP_SCALE, minimum_gap
         )
@@ -232,7 +232,7 @@ def draw_word_strip(pdf: canvas.Canvas, baseline: float, word: str) -> None:
     old_second_x = CONTENT_LEFT + 2.0 * inch
     width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
     old_gap = old_second_x - first_x - width
-    minimum_gap = 0.35 * inch if "-" in word else 0
+    minimum_gap = 0.35 * inch if "-" in word else 0.18 * inch
     second_x = first_x + width + max(old_gap * TRACE_WORD_GAP_SCALE, minimum_gap)
     pdf.setFillColor(TRACE_GRAY)
     pdf.setFont("EduSABeginner-Regular", 34)

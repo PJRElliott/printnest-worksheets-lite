@@ -136,6 +136,17 @@
           "${workspaceFolder}\\outputs\\alphabet\\alphabet_trace_and_write.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Number Words One to Twenty",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_number_words_trace_and_write.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\number-words\\number_words_one_to_twenty.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }
