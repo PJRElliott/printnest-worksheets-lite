@@ -37,8 +37,8 @@ def build_sections(data: dict[str, object]) -> list[tuple[str, list[str]]]:
         ("Core SATPIN Words", data["official_regular"]),
         ("Pronunciation Support", data["pronunciation_attention"]),
         ("Additional CVC Words", data["additional_cvc"]),
-        ("Adjacent-Consonant Words", data["adjacent_consonant_extension"]),
         ("Longer SATPIN Words", data["longer_extension"]),
+        ("Adjacent-Consonant Words", data["adjacent_consonant_extension"]),
     ]
     return [
         (title, words[start:start + 10])
