@@ -105,6 +105,7 @@ def generate(output: Path) -> None:
     draw_instruction_page(pdf, generator)
     draw_days_page(pdf, generator)
     pdf.save()
+    generator.insert_canonical_instruction_page(output)
     print(f"Created {output} (2 page(s))")
 
 

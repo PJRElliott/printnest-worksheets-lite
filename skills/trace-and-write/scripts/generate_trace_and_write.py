@@ -39,6 +39,7 @@ MID_GRAY = Color(0.55, 0.55, 0.55)
 TRACE_GRAY = Color(0.72, 0.72, 0.72)
 FONT_DIR = SKILL_DIR / "assets" / "fonts"
 PAGE_TEMPLATE = SKILL_DIR / "assets" / "images" / "portrait-page-template.png"
+CANONICAL_INSTRUCTION_PAGE = SKILL_DIR / "assets" / "canonical_instruction_page.pdf"
 WORD_FAMILIES_PATH = SKILL_DIR / "references" / "cvc_word_families.json"
 FAMILIES: dict[str, list[str]] = json.loads(
     WORD_FAMILIES_PATH.read_text(encoding="utf-8")
@@ -241,6 +242,9 @@ def draw_word_strip(pdf: canvas.Canvas, baseline: float, word: str) -> None:
 
 
 def draw_instruction_page(pdf: canvas.Canvas) -> None:
+    if CANONICAL_INSTRUCTION_PAGE.exists():
+        pdf.showPage()
+        return
     pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
     title_font = "LeagueSpartan-Bold"
     body_font = "LeagueSpartan-Regular"
@@ -338,6 +342,26 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
     pdf.showPage()
 
 
+def insert_canonical_instruction_page(output: Path) -> None:
+    """Replace the first-page placeholder with the locked instruction PDF."""
+    if not CANONICAL_INSTRUCTION_PAGE.exists():
+        raise FileNotFoundError(f"Missing canonical instruction page: {CANONICAL_INSTRUCTION_PAGE}")
+    try:
+        import pymupdf
+    except ImportError:
+        sys.exit("Install PyMuPDF: pip install PyMuPDF")
+
+    temporary = output.with_name(f".{output.stem}.with-instructions.pdf")
+    workbook = pymupdf.open(output)
+    instruction = pymupdf.open(CANONICAL_INSTRUCTION_PAGE)
+    workbook.delete_page(0)
+    workbook.insert_pdf(instruction, from_page=0, to_page=0, start_at=0)
+    workbook.save(temporary, garbage=4, deflate=True)
+    instruction.close()
+    workbook.close()
+    temporary.replace(output)
+
+
 def draw_packed_page(
     pdf: canvas.Canvas,
     sections: list[tuple[str, list[str]]],
@@ -432,6 +456,7 @@ def main() -> None:
             draw_packed_page(pdf, page_sections)
             page_count += 1
         pdf.save()
+        insert_canonical_instruction_page(args.output)
         print(f"Created {args.output} ({page_count} page(s))")
         return
     singletons: list[tuple[str, str]] = []
@@ -451,6 +476,7 @@ def main() -> None:
         )
         page_count += 1
     pdf.save()
+    insert_canonical_instruction_page(args.output)
     print(f"Created {args.output} ({page_count} page(s))")
 
 

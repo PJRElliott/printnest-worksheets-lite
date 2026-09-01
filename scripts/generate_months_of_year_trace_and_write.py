@@ -101,6 +101,7 @@ def generate(output: Path) -> None:
     for start in range(0, len(MONTHS), generator.MAX_TRACE_STRIPS):
         draw_months_page(pdf, generator, MONTHS[start:start + generator.MAX_TRACE_STRIPS])
     pdf.save()
+    generator.insert_canonical_instruction_page(output)
     print(f"Created {output} (3 page(s))")
 
 

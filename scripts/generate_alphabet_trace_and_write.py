@@ -114,6 +114,7 @@ def generate(output: Path) -> None:
     for uppercase in string.ascii_uppercase:
         draw_letter_page(pdf, generator, uppercase)
     pdf.save()
+    generator.insert_canonical_instruction_page(output)
     print(f"Created {output} (27 page(s))")
 
 

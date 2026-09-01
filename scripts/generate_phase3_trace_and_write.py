@@ -66,6 +66,7 @@ def generate(output: Path, sections: list[dict[str, object]]) -> None:
     for sections in pages:
         generator.draw_packed_page(pdf, sections, title_builder=lambda title: title)
     pdf.save()
+    generator.insert_canonical_instruction_page(output)
     print(f"Created {output} ({len(pages) + 1} page(s))")
 
 

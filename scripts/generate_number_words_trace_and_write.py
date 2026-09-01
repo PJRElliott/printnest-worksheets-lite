@@ -106,6 +106,7 @@ def generate(output: Path) -> None:
     for number, word in enumerate(NUMBER_WORDS, 1):
         draw_number_page(pdf, generator, number, word)
     pdf.save()
+    generator.insert_canonical_instruction_page(output)
     print(f"Created {output} (21 page(s))")
 
 

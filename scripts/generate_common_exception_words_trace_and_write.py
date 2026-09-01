@@ -91,6 +91,7 @@ def generate_set(generator, item: dict, output: Path) -> None:
     for start in range(0, len(words), generator.MAX_TRACE_STRIPS):
         draw_word_page(pdf, generator, item["title"], words[start:start + generator.MAX_TRACE_STRIPS])
     pdf.save()
+    generator.insert_canonical_instruction_page(output)
     print(f"Created {output}")
 
 
