@@ -255,7 +255,7 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
     pdf.drawString(
         CONTENT_LEFT,
         title_y - 0.32 * inch,
-        "Trace each grey word twice, then continue writing to the end using finger spaces.",
+        "Trace each grey word twice, then continue writing with clear finger spaces.",
     )
 
     steps_y = title_y - 0.78 * inch
@@ -270,7 +270,7 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
     pdf.drawString(
         CONTENT_LEFT + 1.08 * inch,
         steps_y - step_gap,
-        "Continue the word to the end using finger spaces.",
+        "Continue writing the word with clear finger spaces.",
     )
     pdf.setFont(title_font, 17)
     pdf.drawString(CONTENT_LEFT, steps_y - 2 * step_gap, "3. Read")
@@ -317,12 +317,12 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
     complete_baseline = PAGE_H - 8.15 * inch
     pdf.setFillColor(black)
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, complete_baseline + 0.82 * inch, "3. Complete Row")
+    pdf.drawString(CONTENT_LEFT, complete_baseline + 0.82 * inch, "3. Continue Writing")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
         complete_baseline + 0.58 * inch,
-        "Six independently written words complete the row.",
+        "Repeat the word as many times as fit comfortably.",
     )
     draw_guide(pdf, complete_baseline)
     pdf.setFillColor(black)
