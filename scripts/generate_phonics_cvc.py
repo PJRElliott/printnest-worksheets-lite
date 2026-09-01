@@ -279,14 +279,14 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     draw_header(c, f"Word Family  ·  {family}",
                 f"Read and trace each {family} word.")
     # 単語をトレース行に配置（4本罫線 × N行）
-    show_count = 10
+    show_count = len(words)
     baselines = tracing_strip_baselines(show_count)
     draw_tracing_heading(c, baselines[0] + TRACE_TOP_EXTENT)
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, CONTENT_LEFT, CONTENT_RIGHT,
                    baseline_y, gap=0.22 * inch)
         # トレース文字（薄）×2
-        word = words[i % len(words)]
+        word = words[i]
         c.setFillColor(TRACE_GRAY)
         c.setFont("EduSABeginner-Regular", 34)
         first_word_x = MARGIN + 0.2 * inch

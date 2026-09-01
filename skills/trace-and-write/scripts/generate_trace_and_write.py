@@ -116,12 +116,12 @@ def draw_guide(pdf: canvas.Canvas, baseline: float) -> None:
 
 def draw_page(pdf: canvas.Canvas, words: list[str]) -> None:
     pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
-    baselines = tracing_strip_baselines()
+    baselines = tracing_strip_baselines(len(words))
     draw_heading(pdf, baselines[0] + TRACE_TOP_EXTENT)
 
     for index, baseline in enumerate(baselines):
         draw_guide(pdf, baseline)
-        word = words[index % len(words)]
+        word = words[index]
         first_x = CONTENT_LEFT + 0.2 * inch
         old_second_x = CONTENT_LEFT + 2.0 * inch
         width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
@@ -166,10 +166,14 @@ def main() -> None:
         selected = [family for family in FAMILIES if family.startswith(args.vowel)]
     else:
         selected = list(FAMILIES)
+    page_count = 0
     for family in selected:
-        draw_page(pdf, FAMILIES[family])
+        words = FAMILIES[family]
+        for start in range(0, len(words), 10):
+            draw_page(pdf, words[start:start + 10])
+            page_count += 1
     pdf.save()
-    print(f"Created {args.output} ({len(selected)} page(s))")
+    print(f"Created {args.output} ({page_count} page(s))")
 
 
 if __name__ == "__main__":
