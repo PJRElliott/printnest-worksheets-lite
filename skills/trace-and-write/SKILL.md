@@ -11,13 +11,15 @@ Generate the requested worksheet with the bundled deterministic script:
 python scripts/generate_trace_and_write.py
 ```
 
-- Use `--family at` to create one word-family page, or omit it to create all 35 pages.
+- Use `--family at` to create one word-family worksheet, or omit it to create all families.
 - Use `--vowel a` to create one workbook containing every family for a selected short vowel.
 - Use `--output <path.pdf>` when the user specifies an output location.
 - Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu SA Beginner only for the grey tracing words.
 - Show each family word exactly once with no repetition. Use one strip per unique word and continue families longer than ten words onto another page.
-- Fix the title and strip coordinates to the ten-row master layout. When a page has fewer than ten words, keep the first rows in their original positions and remove only unused bottom rows.
-- Identify the current family in every title using `Trace and Write -ab Family Words`, substituting the page's actual family ending.
+- Pack complete family sections into unused page space by default. A following section includes its own title, instruction, and strips; start a new page when the complete section will not fit within the ten-position capacity.
+- Identify each section with a left-aligned `-ab Family Words` title, substituting the actual family ending. Do not include `Trace and Write` in the title.
+- Use a 22 pt title and 10 pt instruction, both aligned to the 0.5-inch left content margin. For every heading block, use 0.254 inches (18.3 pt) above the title, 0.08 inches (5.76 pt) between title and instruction, and 0.254 inches (18.3 pt) below the instruction.
+- Keep the established strip spacing within each family. When unused rows remain, remove only the unused bottom rows.
 - Treat [references/cvc_word_families.json](references/cvc_word_families.json) as the canonical strict-CVC dataset. Keep it free of blends, digraphs, silent letters, proper names, and four-phoneme `x` endings.
 - Preserve the established layout: 0.5-inch left, right, and bottom margins; 1-inch top margin; 0.35-inch clear gap between strips; and two tracing examples followed by writing space.
 - Open or render the generated PDF when visual verification is relevant.

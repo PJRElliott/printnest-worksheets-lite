@@ -68,7 +68,12 @@ def tracing_strip_baselines(count: int = MAX_TRACE_STRIPS) -> list[float]:
     return [first - index * step for index in range(count)]
 
 
-def draw_heading(pdf: canvas.Canvas, first_strip_top: float, family: str) -> None:
+def draw_heading(
+    pdf: canvas.Canvas,
+    first_strip_top: float,
+    family: str | None = None,
+    title_override: str | None = None,
+) -> None:
     title_font = "LeagueSpartan-Bold"
     instruction_font = "LeagueSpartan-Regular"
     title_ascent, title_descent = pdfmetrics.getAscentDescent(title_font, TITLE_SIZE)
@@ -89,12 +94,15 @@ def draw_heading(pdf: canvas.Canvas, first_strip_top: float, family: str) -> Non
 
     pdf.setFillColor(black)
     pdf.setFont(title_font, TITLE_SIZE)
-    pdf.drawCentredString(
-        PAGE_W / 2, title_y, f"Trace and Write -{family} Family Words"
+    title = title_override or (
+        f"-{family} Family Words"
+        if family
+        else "Short Vowel Words"
     )
+    pdf.drawString(CONTENT_LEFT, title_y, title)
     pdf.setFont(instruction_font, INSTRUCTION_SIZE)
-    pdf.drawCentredString(
-        PAGE_W / 2,
+    pdf.drawString(
+        CONTENT_LEFT,
         instruction_y,
         "Trace each word twice, then write it on your own.",
     )
@@ -139,6 +147,108 @@ def draw_page(pdf: canvas.Canvas, family: str, words: list[str]) -> None:
     pdf.showPage()
 
 
+def draw_singleton_page(
+    pdf: canvas.Canvas, families: list[tuple[str, str]], vowel: str
+) -> None:
+    pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
+    baselines = tracing_strip_baselines(len(families))
+    draw_heading(
+        pdf,
+        baselines[0] + TRACE_TOP_EXTENT,
+        title_override=f"Short {vowel.upper()} Words",
+    )
+
+    for baseline, (family, word) in zip(baselines, families):
+        draw_guide(pdf, baseline)
+        pdf.setFillColor(black)
+        pdf.setFont("LeagueSpartan-Bold", 12)
+        pdf.drawRightString(
+            CONTENT_RIGHT,
+            baseline + TRACE_TOP_EXTENT + 0.08 * inch,
+            f"-{family} Family",
+        )
+        first_x = CONTENT_LEFT + 0.2 * inch
+        old_second_x = CONTENT_LEFT + 2.0 * inch
+        width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
+        old_gap = old_second_x - first_x - width
+        second_x = first_x + width + old_gap * TRACE_WORD_GAP_SCALE
+        pdf.setFillColor(TRACE_GRAY)
+        pdf.setFont("EduSABeginner-Regular", 34)
+        pdf.drawString(first_x, baseline + 0.04 * inch, word)
+        pdf.drawString(second_x, baseline + 0.04 * inch, word)
+    pdf.showPage()
+
+
+def draw_section_heading(
+    pdf: canvas.Canvas,
+    previous_baseline: float,
+    family: str,
+) -> float:
+    title_font = "LeagueSpartan-Bold"
+    instruction_font = "LeagueSpartan-Regular"
+    title_ascent, title_descent = pdfmetrics.getAscentDescent(title_font, TITLE_SIZE)
+    instruction_ascent, instruction_descent = pdfmetrics.getAscentDescent(
+        instruction_font, INSTRUCTION_SIZE
+    )
+    first_strip_top = tracing_strip_baselines(MAX_TRACE_STRIPS)[0] + TRACE_TOP_EXTENT
+    heading_available = BANNER_BOTTOM - first_strip_top
+    outer_gap = (
+        heading_available
+        - (title_ascent - title_descent)
+        - (instruction_ascent - instruction_descent)
+        - TITLE_INSTRUCTION_GAP
+    ) / 2
+    title_y = previous_baseline - TRACE_BOTTOM_EXTENT - outer_gap - title_ascent
+    instruction_y = (
+        title_y + title_descent - TITLE_INSTRUCTION_GAP - instruction_ascent
+    )
+    instruction_bottom = instruction_y + instruction_descent
+    next_baseline = instruction_bottom - outer_gap - TRACE_TOP_EXTENT
+
+    pdf.setFillColor(black)
+    pdf.setFont(title_font, TITLE_SIZE)
+    pdf.drawString(
+        CONTENT_LEFT, title_y, f"-{family} Family Words"
+    )
+    pdf.setFont(instruction_font, INSTRUCTION_SIZE)
+    pdf.drawString(
+        CONTENT_LEFT,
+        instruction_y,
+        "Trace each word twice, then write it on your own.",
+    )
+    return next_baseline
+
+
+def draw_word_strip(pdf: canvas.Canvas, baseline: float, word: str) -> None:
+    draw_guide(pdf, baseline)
+    first_x = CONTENT_LEFT + 0.2 * inch
+    old_second_x = CONTENT_LEFT + 2.0 * inch
+    width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
+    old_gap = old_second_x - first_x - width
+    second_x = first_x + width + old_gap * TRACE_WORD_GAP_SCALE
+    pdf.setFillColor(TRACE_GRAY)
+    pdf.setFont("EduSABeginner-Regular", 34)
+    pdf.drawString(first_x, baseline + 0.04 * inch, word)
+    pdf.drawString(second_x, baseline + 0.04 * inch, word)
+
+
+def draw_packed_page(
+    pdf: canvas.Canvas, sections: list[tuple[str, list[str]]]
+) -> None:
+    pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
+    step = TRACE_TOP_EXTENT + TRACE_BOTTOM_EXTENT + TRACE_GAP
+    baseline = tracing_strip_baselines(MAX_TRACE_STRIPS)[0]
+    draw_heading(pdf, baseline + TRACE_TOP_EXTENT, sections[0][0])
+    for section_index, (family, words) in enumerate(sections):
+        if section_index:
+            baseline = draw_section_heading(pdf, baseline, family)
+        for word_index, word in enumerate(words):
+            if word_index:
+                baseline -= step
+            draw_word_strip(pdf, baseline, word)
+    pdf.showPage()
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     selection = parser.add_mutually_exclusive_group()
@@ -157,6 +267,16 @@ def parse_args() -> argparse.Namespace:
         / "trace_and_write"
         / "trace_and_write_cvc.pdf",
     )
+    parser.add_argument(
+        "--merge-singletons",
+        action="store_true",
+        help="Combine one-word families on a shared labeled page",
+    )
+    parser.add_argument(
+        "--pack-families",
+        action="store_true",
+        help="Move following family sections into unused page space",
+    )
     return parser.parse_args()
 
 
@@ -172,11 +292,47 @@ def main() -> None:
     else:
         selected = list(FAMILIES)
     page_count = 0
+    if args.pack_families or (not args.family and not args.merge_singletons):
+        sections = [
+            (family, FAMILIES[family][start:start + MAX_TRACE_STRIPS])
+            for family in selected
+            for start in range(0, len(FAMILIES[family]), MAX_TRACE_STRIPS)
+        ]
+        pages: list[list[tuple[str, list[str]]]] = []
+        used = 0
+        for section in sections:
+            cost = len(section[1]) + (1 if used else 0)
+            if used and used + cost > MAX_TRACE_STRIPS:
+                pages.append([])
+                used = 0
+                cost = len(section[1])
+            if not pages or not pages[-1]:
+                if not pages or pages[-1]:
+                    pages.append([])
+            pages[-1].append(section)
+            used += cost
+        for page_sections in pages:
+            draw_packed_page(pdf, page_sections)
+            page_count += 1
+        pdf.save()
+        print(f"Created {args.output} ({page_count} page(s))")
+        return
+    singletons: list[tuple[str, str]] = []
     for family in selected:
         words = FAMILIES[family]
+        if args.merge_singletons and len(words) == 1:
+            singletons.append((family, words[0]))
+            continue
         for start in range(0, len(words), 10):
             draw_page(pdf, family, words[start:start + 10])
             page_count += 1
+    for start in range(0, len(singletons), MAX_TRACE_STRIPS):
+        draw_singleton_page(
+            pdf,
+            singletons[start:start + MAX_TRACE_STRIPS],
+            args.vowel or singletons[start][0][0],
+        )
+        page_count += 1
     pdf.save()
     print(f"Created {args.output} ({page_count} page(s))")
 
