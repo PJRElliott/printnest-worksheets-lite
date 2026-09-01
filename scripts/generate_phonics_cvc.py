@@ -233,17 +233,13 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
         show_count, CONTENT_TOP - 0.44 * inch, CONTENT_BOTTOM + 0.22 * inch
     )
     for i, baseline_y in enumerate(baselines):
-        draw_4line(c, MARGIN + 0.3 * inch, PAGE_W - MARGIN - 0.3 * inch,
+        draw_4line(c, CONTENT_LEFT, CONTENT_RIGHT,
                    baseline_y, gap=0.22 * inch)
-        # 番号
-        c.setFillColor(DARK)
-        c.setFont("LeagueSpartan-SemiBold", 14)
-        c.drawString(MARGIN, baseline_y + 0.05 * inch, f"{i + 1}.")
         # トレース文字（薄）×2
         word = words[i % len(words)]
         c.setFillColor(TRACE_GRAY)
         c.setFont("LeagueSpartan-Bold", 34)
-        c.drawString(MARGIN + 0.45 * inch, baseline_y + 0.04 * inch, word)
+        c.drawString(MARGIN + 0.2 * inch, baseline_y + 0.04 * inch, word)
         c.drawString(MARGIN + 2.0 * inch, baseline_y + 0.04 * inch, word)
         # 残りは空白（自由に書く）
 
