@@ -30,9 +30,9 @@ except ImportError:
 SKILL_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_BASE = Path.home() / "Desktop" / "PrintNest"
 PAGE_W, PAGE_H = A4
-MARGIN = 0.75 * inch
-CONTENT_TOP = PAGE_H - 1.15 * inch
-CONTENT_BOTTOM = 1.3 * inch
+MARGIN = 0.5 * inch
+CONTENT_TOP = PAGE_H - 1.5 * inch
+CONTENT_BOTTOM = 1.5 * inch
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -175,7 +175,7 @@ def page_copyright(c, meta: dict) -> None:
         "author. Cover illustration created with the help of AI image",
         "generation tools.",
     ]
-    y = PAGE_H - 1.2 * inch
+    y = CONTENT_TOP
     for line in lines:
         c.drawCentredString(PAGE_W / 2, y, line)
         y -= 0.3 * inch
@@ -193,7 +193,7 @@ def page_howto(c) -> None:
         "4. -at words: cat, bat, hat, mat, rat, sat...",
         "5. Reading one word family makes the others easier!",
     ]
-    y = PAGE_H - 1.2 * inch
+    y = CONTENT_TOP
     c.setFont("LeagueSpartan-Regular", 13)
     c.setFillColor(DARK)
     for s in steps:
@@ -226,15 +226,15 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
                 f"Read and trace each {family} word.")
     # 大きな family 表示
     c.setFillColor(SOFT_PURPLE)
-    c.roundRect(MARGIN, PAGE_H - 1.3 * inch, PAGE_W - 2 * MARGIN, 0.9 * inch,
+    c.roundRect(MARGIN, PAGE_H - 2.3 * inch, PAGE_W - 2 * MARGIN, 0.8 * inch,
                 0.15 * inch, fill=1, stroke=0)
     c.setFillColor(PRIMARY)
     c.setFont("LeagueSpartan-ExtraBold", 56)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 1.1 * inch, family)
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 2.05 * inch, family)
 
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = min(len(words), 6)
-    baselines = spread_rows(show_count, PAGE_H - 2.35 * inch, CONTENT_BOTTOM)
+    baselines = spread_rows(show_count, PAGE_H - 3.0 * inch, CONTENT_BOTTOM)
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, MARGIN + 0.3 * inch, PAGE_W - MARGIN - 0.3 * inch,
                    baseline_y, gap=0.22 * inch)
@@ -293,7 +293,7 @@ def page_mixed_review(c, page_num: int, rng: random.Random,
     draw_header(c, "Mixed Review  ·  Word Family Sort",
                 "Read the word, then circle its family ending.")
     items = rng.sample(all_words, 10)
-    row_positions = spread_rows(5, PAGE_H - 1.25 * inch, 1.55 * inch)
+    row_positions = spread_rows(5, CONTENT_TOP, CONTENT_BOTTOM)
     for i, (word, fam) in enumerate(items):
         row, col = divmod(i, 2)
         x0 = MARGIN + col * (PAGE_W - 2 * MARGIN) / 2
@@ -331,19 +331,19 @@ def page_build_word(c, page_num: int, family: str, letters: list[str]) -> None:
                 f"Add a letter at the start to make {family} family words.")
     # ヘッダー: [__]  a t  → make as many as you can
     c.setFillColor(SOFT_YELLOW)
-    c.roundRect(MARGIN, PAGE_H - 1.4 * inch, PAGE_W - 2 * MARGIN, 0.9 * inch,
+    c.roundRect(MARGIN, PAGE_H - 2.3 * inch, PAGE_W - 2 * MARGIN, 0.8 * inch,
                 0.15 * inch, fill=1, stroke=0)
     c.setFillColor(DARK)
     c.setFont("LeagueSpartan-ExtraBold", 42)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 1.15 * inch,
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 2.05 * inch,
                         f"_ _   +   {family}   =   ?")
     # 候補文字
     c.setFillColor(DARK)
     c.setFont("LeagueSpartan-SemiBold", 14)
-    c.drawString(MARGIN + 0.3 * inch, PAGE_H - 1.9 * inch,
+    c.drawString(MARGIN + 0.3 * inch, PAGE_H - 2.65 * inch,
                  "Try these letters:  " + " · ".join(letters))
     # 書き欄 8つ
-    row_positions = spread_rows(4, PAGE_H - 2.65 * inch, 1.55 * inch)
+    row_positions = spread_rows(4, PAGE_H - 3.3 * inch, CONTENT_BOTTOM)
     for i in range(8):
         row, col = divmod(i, 2)
         x = MARGIN + 0.5 * inch + col * 3.4 * inch
@@ -368,7 +368,7 @@ def page_answers(c, page_num: int, items: list) -> None:
     """items: [(page_label, [(question, answer), ...]), ...]"""
     draw_header(c, "Answer Key",
                 "Here are the answers for each Mixed Review page.")
-    y = PAGE_H - 1.0 * inch
+    y = CONTENT_TOP
     for label, pairs in items:
         c.setFillColor(PRIMARY)
         c.setFont("LeagueSpartan-Bold", 12)
