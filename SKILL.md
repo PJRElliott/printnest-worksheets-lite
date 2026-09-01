@@ -37,6 +37,7 @@ The CVC generator uses a print-first, monochrome worksheet system:
 - Keep worksheet text and rules black; use gray only for letters intended to be traced.
 - Generate CVC pages at A4 size with a 0.75-inch content margin.
 - Render `assets/images/portrait-page-template.png` as the full-page background before drawing content. The template controls banner, footer, and outer padding; do not draw separate header or footer elements over it.
+- Distribute exercise rows vertically across the full safe content area, from below the banner to above the footer. Avoid layouts that cluster content in the upper half or leave an unnecessarily empty lower half.
 - Keep exercise content clear of the footer artwork.
 
 Or just ask Claude:

@@ -31,6 +31,8 @@ SKILL_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_BASE = Path.home() / "Desktop" / "PrintNest"
 PAGE_W, PAGE_H = A4
 MARGIN = 0.75 * inch
+CONTENT_TOP = PAGE_H - 1.15 * inch
+CONTENT_BOTTOM = 1.3 * inch
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -57,6 +59,14 @@ def register_fonts() -> None:
     for font_name, filename in FONTS.items():
         path = FONT_DIR / filename
         pdfmetrics.registerFont(TTFont(font_name, str(path)))
+
+
+def spread_rows(count: int, top: float, bottom: float) -> list[float]:
+    """Return evenly distributed baselines spanning the page's safe content area."""
+    if count <= 1:
+        return [(top + bottom) / 2]
+    step = (top - bottom) / (count - 1)
+    return [top - i * step for i in range(count)]
 
 FAMILIES = [
     ("-at", ["cat", "bat", "hat", "mat", "rat", "sat", "fat", "pat"]),
@@ -224,8 +234,8 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
 
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = min(len(words), 6)
-    for i in range(show_count):
-        baseline_y = PAGE_H - 2.4 * inch - i * 1.0 * inch
+    baselines = spread_rows(show_count, PAGE_H - 2.35 * inch, CONTENT_BOTTOM)
+    for i, baseline_y in enumerate(baselines):
         draw_4line(c, MARGIN + 0.3 * inch, PAGE_W - MARGIN - 0.3 * inch,
                    baseline_y, gap=0.22 * inch)
         # 番号
@@ -252,8 +262,8 @@ def page_missing_letter(c, page_num: int, family: str, words: list[str],
     answers = []
     # 各行：[__]  a  t   ← 大きく描画
     show = min(len(words), 8)
-    for i in range(show):
-        baseline_y = PAGE_H - 1.2 * inch - i * 0.8 * inch
+    baselines = spread_rows(show, CONTENT_TOP, CONTENT_BOTTOM)
+    for i, baseline_y in enumerate(baselines):
         word = words[i]
         answers.append(word[0])
         # 番号
@@ -283,10 +293,11 @@ def page_mixed_review(c, page_num: int, rng: random.Random,
     draw_header(c, "Mixed Review  ·  Word Family Sort",
                 "Read the word, then circle its family ending.")
     items = rng.sample(all_words, 10)
+    row_positions = spread_rows(5, PAGE_H - 1.25 * inch, 1.55 * inch)
     for i, (word, fam) in enumerate(items):
         row, col = divmod(i, 2)
         x0 = MARGIN + col * (PAGE_W - 2 * MARGIN) / 2
-        y = PAGE_H - 1.1 * inch - row * 1.2 * inch
+        y = row_positions[row]
         # 番号 + 単語
         c.setFillColor(DARK)
         c.setFont("LeagueSpartan-SemiBold", 14)
@@ -332,10 +343,11 @@ def page_build_word(c, page_num: int, family: str, letters: list[str]) -> None:
     c.drawString(MARGIN + 0.3 * inch, PAGE_H - 1.9 * inch,
                  "Try these letters:  " + " · ".join(letters))
     # 書き欄 8つ
+    row_positions = spread_rows(4, PAGE_H - 2.65 * inch, 1.55 * inch)
     for i in range(8):
         row, col = divmod(i, 2)
         x = MARGIN + 0.5 * inch + col * 3.4 * inch
-        y = PAGE_H - 2.6 * inch - row * 1.0 * inch
+        y = row_positions[row]
         c.setFillColor(DARK)
         c.setFont("LeagueSpartan-SemiBold", 14)
         c.drawString(x - 0.35 * inch, y + 0.1 * inch, f"{i + 1}.")
