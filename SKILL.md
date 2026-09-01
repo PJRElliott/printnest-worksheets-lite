@@ -35,7 +35,7 @@ The CVC generator uses a print-first, monochrome worksheet system:
 - Do not add worksheet headers, subtitles, divider rules, page numbers, or student-name footers.
 - Use the bundled League Spartan Regular, Semibold, Bold, and ExtraBold fonts for all text.
 - Keep worksheet text and rules black; use gray only for letters intended to be traced.
-- Generate CVC pages at A4 size with 0.50-inch left/right margins, a 1.60-inch top margin, and a 1.00-inch bottom margin for all content.
+- Generate CVC pages at A4 size with 0.50-inch left/right margins, a 1.00-inch top margin, and a 0.75-inch bottom margin for all content.
 - Treat those four values as one shared safe-area rectangle on every page. Account for text height, line height, box dimensions, and circle radii so visible element edges remain inside it; do not introduce page-specific outer margins.
 - Render `assets/images/portrait-page-template.png` as the full-page background before drawing content. The template controls banner, footer, and outer padding; do not draw separate header or footer elements over it.
 - Distribute exercise rows vertically across the full safe content area, from below the banner to above the footer. Avoid layouts that cluster content in the upper half or leave an unnecessarily empty lower half.
