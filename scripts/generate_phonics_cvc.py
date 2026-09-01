@@ -228,7 +228,7 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     draw_header(c, f"Word Family  ·  {family}",
                 f"Read and trace each {family} word.")
     # 単語をトレース行に配置（4本罫線 × N行）
-    show_count = min(len(words), 6)
+    show_count = 10
     baselines = spread_rows(
         show_count, CONTENT_TOP - 0.44 * inch, CONTENT_BOTTOM + 0.22 * inch
     )
@@ -240,7 +240,7 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
         c.setFont("LeagueSpartan-SemiBold", 14)
         c.drawString(MARGIN, baseline_y + 0.05 * inch, f"{i + 1}.")
         # トレース文字（薄）×2
-        word = words[i]
+        word = words[i % len(words)]
         c.setFillColor(TRACE_GRAY)
         c.setFont("LeagueSpartan-Bold", 34)
         c.drawString(MARGIN + 0.45 * inch, baseline_y + 0.04 * inch, word)
