@@ -38,6 +38,9 @@ CONTENT_RIGHT = PAGE_W - MARGIN
 TRACE_TOP_EXTENT = 0.44 * inch
 TRACE_BOTTOM_EXTENT = 0.22 * inch
 TRACE_GAP = 0.35 * inch
+BANNER_BOTTOM = PAGE_H - PAGE_H * 115 / 5999
+TRACING_TITLE_SIZE = 18
+TRACING_INSTRUCTION_SIZE = 10
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -82,6 +85,36 @@ def tracing_strip_baselines(count: int) -> list[float]:
     top_inset = max(0, (safe_height - group_height) / 2)
     first_baseline = CONTENT_TOP - top_inset - TRACE_TOP_EXTENT
     return [first_baseline - i * baseline_step for i in range(count)]
+
+
+def draw_tracing_heading(c, first_strip_top: float) -> None:
+    title_font = "LeagueSpartan-Bold"
+    instruction_font = "LeagueSpartan-Regular"
+    title_ascent, title_descent = pdfmetrics.getAscentDescent(
+        title_font, TRACING_TITLE_SIZE
+    )
+    instruction_ascent, instruction_descent = pdfmetrics.getAscentDescent(
+        instruction_font, TRACING_INSTRUCTION_SIZE
+    )
+    title_height = title_ascent - title_descent
+    instruction_height = instruction_ascent - instruction_descent
+    available_space = BANNER_BOTTOM - first_strip_top
+    clear_gap = (available_space - title_height - instruction_height) / 3
+
+    title_baseline = BANNER_BOTTOM - clear_gap - title_ascent
+    instruction_baseline = (
+        title_baseline + title_descent - clear_gap - instruction_ascent
+    )
+
+    c.setFillColor(BLACK)
+    c.setFont(title_font, TRACING_TITLE_SIZE)
+    c.drawCentredString(PAGE_W / 2, title_baseline, "Trace and Write CVC Words")
+    c.setFont(instruction_font, TRACING_INSTRUCTION_SIZE)
+    c.drawCentredString(
+        PAGE_W / 2,
+        instruction_baseline,
+        "Trace each word twice, then write it on your own.",
+    )
 
 FAMILIES = [
     ("-at", ["cat", "bat", "hat", "mat", "rat", "sat", "fat", "pat"]),
@@ -240,20 +273,10 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     """word family の紹介＋全単語トレース"""
     draw_header(c, f"Word Family  ·  {family}",
                 f"Read and trace each {family} word.")
-    c.setFillColor(BLACK)
-    c.setFont("LeagueSpartan-Bold", 18)
-    c.drawCentredString(
-        PAGE_W / 2, PAGE_H - 0.5 * inch, "Trace and Write CVC Words"
-    )
-    c.setFont("LeagueSpartan-Regular", 10)
-    c.drawCentredString(
-        PAGE_W / 2,
-        PAGE_H - 0.72 * inch,
-        "Trace each word twice, then write it on your own.",
-    )
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = 10
     baselines = tracing_strip_baselines(show_count)
+    draw_tracing_heading(c, baselines[0] + TRACE_TOP_EXTENT)
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, CONTENT_LEFT, CONTENT_RIGHT,
                    baseline_y, gap=0.22 * inch)

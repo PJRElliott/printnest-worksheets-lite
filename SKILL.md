@@ -44,6 +44,7 @@ The CVC generator uses a print-first, monochrome worksheet system:
 - Keep exactly 0.35 inches of clear vertical space between adjacent tracing strips and center the ten-strip group within the shared safe area.
 - Do not number the tracing strips. Extend each handwriting guide across the full shared content width.
 - Above tracing strips, show the title `Trace and Write CVC Words` and the one-line instruction `Trace each word twice, then write it on your own.` inside the reserved area below the banner. This is the only exercise-page title/instruction exception.
+- Use embedded font metrics to keep equal clear spacing above the tracing title, between the title and instruction, and below the instruction before the first strip.
 - Keep exercise content clear of the footer artwork.
 
 Or just ask Claude:
