@@ -227,19 +227,10 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     """word family の紹介＋全単語トレース"""
     draw_header(c, f"Word Family  ·  {family}",
                 f"Read and trace each {family} word.")
-    # 大きな family 表示
-    c.setFillColor(SOFT_PURPLE)
-    c.roundRect(CONTENT_LEFT, CONTENT_TOP - 0.8 * inch,
-                CONTENT_RIGHT - CONTENT_LEFT, 0.8 * inch,
-                0.15 * inch, fill=1, stroke=0)
-    c.setFillColor(PRIMARY)
-    c.setFont("LeagueSpartan-ExtraBold", 56)
-    c.drawCentredString(PAGE_W / 2, CONTENT_TOP - 0.55 * inch, family)
-
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = min(len(words), 6)
     baselines = spread_rows(
-        show_count, CONTENT_TOP - 1.45 * inch, CONTENT_BOTTOM + 0.22 * inch
+        show_count, CONTENT_TOP - 0.44 * inch, CONTENT_BOTTOM + 0.22 * inch
     )
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, MARGIN + 0.3 * inch, PAGE_W - MARGIN - 0.3 * inch,
@@ -339,23 +330,9 @@ def page_build_word(c, page_num: int, family: str, letters: list[str]) -> None:
     """family の前に文字を足して何語作れるか練習"""
     draw_header(c, f"Build a Word  ·  {family}",
                 f"Add a letter at the start to make {family} family words.")
-    # ヘッダー: [__]  a t  → make as many as you can
-    c.setFillColor(SOFT_YELLOW)
-    c.roundRect(CONTENT_LEFT, CONTENT_TOP - 0.8 * inch,
-                CONTENT_RIGHT - CONTENT_LEFT, 0.8 * inch,
-                0.15 * inch, fill=1, stroke=0)
-    c.setFillColor(DARK)
-    c.setFont("LeagueSpartan-ExtraBold", 42)
-    c.drawCentredString(PAGE_W / 2, CONTENT_TOP - 0.55 * inch,
-                        f"_ _   +   {family}   =   ?")
-    # 候補文字
-    c.setFillColor(DARK)
-    c.setFont("LeagueSpartan-SemiBold", 14)
-    c.drawString(MARGIN + 0.3 * inch, CONTENT_TOP - 1.15 * inch,
-                 "Try these letters:  " + " · ".join(letters))
     # 書き欄 8つ
     row_positions = spread_rows(
-        4, CONTENT_TOP - 1.8 * inch, CONTENT_BOTTOM + 0.05 * inch
+        4, CONTENT_TOP - 0.5 * inch, CONTENT_BOTTOM + 0.05 * inch
     )
     for i in range(8):
         row, col = divmod(i, 2)
@@ -383,14 +360,15 @@ def page_answers(c, page_num: int, items: list) -> None:
                 "Here are the answers for each Mixed Review page.")
     y = CONTENT_TOP - 0.2 * inch
     for label, pairs in items:
-        c.setFillColor(PRIMARY)
-        c.setFont("LeagueSpartan-Bold", 12)
-        c.drawString(MARGIN, y, label)
-        y -= 0.22 * inch
+        page_reference = label.removeprefix("Page ")
         c.setFillColor(DARK)
         c.setFont("LeagueSpartan-Regular", 11)
-        for q, a in pairs:
-            c.drawString(MARGIN + 0.3 * inch, y, f"{q}  →  {a}")
+        for question_number, (q, a) in enumerate(pairs, start=1):
+            c.drawString(
+                MARGIN,
+                y,
+                f"{page_reference}.{question_number}  {q}  →  {a}",
+            )
             y -= 0.20 * inch
         y -= 0.15 * inch
         if y < CONTENT_BOTTOM:
@@ -414,9 +392,6 @@ def main() -> None:
 
     c = canvas.Canvas(str(output_pdf), pagesize=A4)
     page_num = 0
-    page_cover(c, meta); page_num += 1
-    page_copyright(c, meta); page_num += 1
-    page_howto(c); page_num += 1
 
     # 各family: intro + missing-letter + build-word = 3ページ
     all_word_pairs = []
