@@ -275,31 +275,45 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
         "Say each sound, then read the whole word.",
     )
 
-    before_baseline = PAGE_H - 4.05 * inch
+    empty_baseline = PAGE_H - 4.15 * inch
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, before_baseline + 0.82 * inch, "Before")
+    pdf.drawString(CONTENT_LEFT, empty_baseline + 0.82 * inch, "1. Empty")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
-        before_baseline + 0.58 * inch,
-        "The final writing space is empty.",
+        empty_baseline + 0.58 * inch,
+        "Begin with an empty handwriting strip.",
     )
-    draw_word_strip(pdf, before_baseline, "cat")
+    draw_guide(pdf, empty_baseline)
 
-    after_baseline = PAGE_H - 6.10 * inch
+    trace_baseline = PAGE_H - 6.15 * inch
     pdf.setFillColor(black)
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, after_baseline + 0.82 * inch, "After")
+    pdf.drawString(CONTENT_LEFT, trace_baseline + 0.82 * inch, "2. Trace")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
-        after_baseline + 0.58 * inch,
-        "The word has been written independently.",
+        trace_baseline + 0.58 * inch,
+        "The two grey words are ready to trace.",
     )
-    draw_word_strip(pdf, after_baseline, "cat")
+    draw_word_strip(pdf, trace_baseline, "cat")
+
+    complete_baseline = PAGE_H - 8.15 * inch
+    pdf.setFillColor(black)
+    pdf.setFont(title_font, 20)
+    pdf.drawString(CONTENT_LEFT, complete_baseline + 0.82 * inch, "3. Complete")
+    pdf.setFont(body_font, 10)
+    pdf.drawString(
+        CONTENT_LEFT,
+        complete_baseline + 0.58 * inch,
+        "The traced words and independent word are complete.",
+    )
+    draw_word_strip(pdf, complete_baseline, "cat")
     pdf.setFillColor(black)
     pdf.setFont("EduSABeginner-Regular", 34)
-    pdf.drawString(CONTENT_LEFT + 4.0 * inch, after_baseline + 0.04 * inch, "cat")
+    pdf.drawString(
+        CONTENT_LEFT + 4.0 * inch, complete_baseline + 0.04 * inch, "cat"
+    )
     pdf.showPage()
 
 
