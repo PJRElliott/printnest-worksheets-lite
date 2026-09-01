@@ -187,6 +187,15 @@
           "${workspaceFolder}\\outputs\\months-of-year\\months_of_the_year_trace_and_write.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate KS1 Common Exception Words",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_common_exception_words_trace_and_write.py"
+        ],
+        "problemMatcher": []
       }
     ]
   }

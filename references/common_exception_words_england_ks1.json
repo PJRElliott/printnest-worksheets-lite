@@ -1,0 +1,30 @@
+{
+  "curriculum": "National curriculum in England: English programmes of study, English Appendix 1: Spelling",
+  "source_url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/239784/English_Appendix_1_-_Spelling.pdf",
+  "sets": [
+    {
+      "id": "year_1",
+      "title": "Year 1 Common Exception Words",
+      "words": [
+        "the", "a", "do", "to", "today", "of", "said", "says", "are", "were",
+        "was", "is", "his", "has", "I", "you", "your", "they", "be", "he", "me",
+        "she", "we", "no", "go", "so", "by", "my", "here", "there", "where",
+        "love", "come", "some", "one", "once", "ask", "friend", "school", "put", "push",
+        "pull", "full", "house", "our"
+      ]
+    },
+    {
+      "id": "year_2",
+      "title": "Year 2 Common Exception Words",
+      "words": [
+        "door", "floor", "poor", "because", "find", "kind", "mind", "behind", "child", "children",
+        "wild", "climb", "most", "only", "both", "old", "cold", "gold", "hold", "told",
+        "every", "everybody", "even", "great", "break", "steak", "pretty", "beautiful", "after", "fast",
+        "last", "past", "father", "class", "grass", "pass", "plant", "path", "bath", "hour",
+        "move", "prove", "improve", "sure", "sugar", "eye", "could", "should", "would", "who",
+        "whole", "any", "many", "clothes", "busy", "people", "water", "again", "half", "money",
+        "Mr", "Mrs", "parents", "Christmas"
+      ]
+    }
+  ]
+}
