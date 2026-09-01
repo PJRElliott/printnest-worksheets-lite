@@ -33,6 +33,7 @@ TITLE_SIZE = 22
 INSTRUCTION_SIZE = 10
 TITLE_INSTRUCTION_GAP = 0.08 * inch
 TRACE_WORD_GAP_SCALE = 0.60
+MAX_TRACE_STRIPS = 10
 
 MID_GRAY = Color(0.55, 0.55, 0.55)
 TRACE_GRAY = Color(0.72, 0.72, 0.72)
@@ -56,10 +57,12 @@ def register_fonts() -> None:
     )
 
 
-def tracing_strip_baselines(count: int = 10) -> list[float]:
+def tracing_strip_baselines(count: int = MAX_TRACE_STRIPS) -> list[float]:
+    if not 1 <= count <= MAX_TRACE_STRIPS:
+        raise ValueError(f"Strip count must be between 1 and {MAX_TRACE_STRIPS}")
     strip_height = TRACE_TOP_EXTENT + TRACE_BOTTOM_EXTENT
     step = strip_height + TRACE_GAP
-    group_height = strip_height + (count - 1) * step
+    group_height = strip_height + (MAX_TRACE_STRIPS - 1) * step
     top_inset = max(0, (CONTENT_TOP - CONTENT_BOTTOM - group_height) / 2)
     first = CONTENT_TOP - top_inset - TRACE_TOP_EXTENT
     return [first - index * step for index in range(count)]

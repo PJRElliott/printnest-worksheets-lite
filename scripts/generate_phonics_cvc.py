@@ -43,6 +43,7 @@ TRACING_TITLE_SIZE = 22
 TRACING_INSTRUCTION_SIZE = 10
 TRACING_LINE_GAP = 0.08 * inch
 TRACE_WORD_GAP_SCALE = 0.60
+MAX_TRACE_STRIPS = 10
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -81,9 +82,11 @@ def spread_rows(count: int, top: float, bottom: float) -> list[float]:
 
 
 def tracing_strip_baselines(count: int) -> list[float]:
+    if not 1 <= count <= MAX_TRACE_STRIPS:
+        raise ValueError(f"Strip count must be between 1 and {MAX_TRACE_STRIPS}")
     strip_height = TRACE_TOP_EXTENT + TRACE_BOTTOM_EXTENT
     baseline_step = strip_height + TRACE_GAP
-    group_height = strip_height + (count - 1) * baseline_step
+    group_height = strip_height + (MAX_TRACE_STRIPS - 1) * baseline_step
     safe_height = CONTENT_TOP - CONTENT_BOTTOM
     top_inset = max(0, (safe_height - group_height) / 2)
     first_baseline = CONTENT_TOP - top_inset - TRACE_TOP_EXTENT

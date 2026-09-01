@@ -16,6 +16,7 @@ python scripts/generate_trace_and_write.py
 - Use `--output <path.pdf>` when the user specifies an output location.
 - Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu SA Beginner only for the grey tracing words.
 - Show each family word exactly once with no repetition. Use one strip per unique word and continue families longer than ten words onto another page.
+- Fix the title and strip coordinates to the ten-row master layout. When a page has fewer than ten words, keep the first rows in their original positions and remove only unused bottom rows.
 - Identify the current family in every title using `Trace and Write -ab Family Words`, substituting the page's actual family ending.
 - Treat [references/cvc_word_families.json](references/cvc_word_families.json) as the canonical strict-CVC dataset. Keep it free of blends, digraphs, silent letters, proper names, and four-phoneme `x` endings.
 - Preserve the established layout: 0.5-inch left, right, and bottom margins; 1-inch top margin; 0.35-inch clear gap between strips; and two tracing examples followed by writing space.
