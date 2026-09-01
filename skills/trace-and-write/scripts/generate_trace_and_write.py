@@ -249,7 +249,7 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
     pdf.drawString(
         CONTENT_LEFT,
         title_y - 0.32 * inch,
-        "Trace each grey word twice, then write the word once on your own.",
+        "Trace each grey word twice, then continue writing to the end using finger spaces.",
     )
 
     steps_y = title_y - 0.78 * inch
@@ -264,7 +264,7 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
     pdf.drawString(
         CONTENT_LEFT + 1.08 * inch,
         steps_y - step_gap,
-        "Copy the word in the empty space.",
+        "Continue the word to the end using finger spaces.",
     )
     pdf.setFont(title_font, 17)
     pdf.drawString(CONTENT_LEFT, steps_y - 2 * step_gap, "3. Read")
@@ -275,45 +275,54 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
         "Say each sound, then read the whole word.",
     )
 
-    empty_baseline = PAGE_H - 4.15 * inch
+    grey_baseline = PAGE_H - 4.15 * inch
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, empty_baseline + 0.82 * inch, "1. Empty")
+    pdf.drawString(CONTENT_LEFT, grey_baseline + 0.82 * inch, "1. Grey Word")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
-        empty_baseline + 0.58 * inch,
-        "Begin with an empty handwriting strip.",
+        grey_baseline + 0.58 * inch,
+        "The word begins as a grey tracing model.",
     )
-    draw_guide(pdf, empty_baseline)
+    draw_guide(pdf, grey_baseline)
+    pdf.setFillColor(TRACE_GRAY)
+    pdf.setFont("EduSABeginner-Regular", 34)
+    pdf.drawString(CONTENT_LEFT + 0.2 * inch, grey_baseline + 0.04 * inch, "cat")
 
-    trace_baseline = PAGE_H - 6.15 * inch
+    black_baseline = PAGE_H - 6.15 * inch
     pdf.setFillColor(black)
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, trace_baseline + 0.82 * inch, "2. Trace")
+    pdf.drawString(CONTENT_LEFT, black_baseline + 0.82 * inch, "2. Traced Word")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
-        trace_baseline + 0.58 * inch,
-        "The two grey words are ready to trace.",
+        black_baseline + 0.58 * inch,
+        "The traced word is now shown in black.",
     )
-    draw_word_strip(pdf, trace_baseline, "cat")
+    draw_guide(pdf, black_baseline)
+    pdf.setFillColor(black)
+    pdf.setFont("EduSABeginner-Regular", 34)
+    pdf.drawString(CONTENT_LEFT + 0.2 * inch, black_baseline + 0.04 * inch, "cat")
 
     complete_baseline = PAGE_H - 8.15 * inch
     pdf.setFillColor(black)
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, complete_baseline + 0.82 * inch, "3. Complete")
+    pdf.drawString(CONTENT_LEFT, complete_baseline + 0.82 * inch, "3. Complete Row")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
         complete_baseline + 0.58 * inch,
-        "The traced words and independent word are complete.",
+        "Six independently written words complete the row.",
     )
-    draw_word_strip(pdf, complete_baseline, "cat")
+    draw_guide(pdf, complete_baseline)
     pdf.setFillColor(black)
     pdf.setFont("EduSABeginner-Regular", 34)
-    pdf.drawString(
-        CONTENT_LEFT + 4.0 * inch, complete_baseline + 0.04 * inch, "cat"
-    )
+    word_width = pdfmetrics.stringWidth("cat", "EduSABeginner-Regular", 34)
+    usable_width = CONTENT_RIGHT - CONTENT_LEFT - 0.4 * inch
+    word_gap = (usable_width - 6 * word_width) / 5
+    for index in range(6):
+        word_x = CONTENT_LEFT + 0.2 * inch + index * (word_width + word_gap)
+        pdf.drawString(word_x, complete_baseline + 0.04 * inch, "cat")
     pdf.showPage()
 
 
