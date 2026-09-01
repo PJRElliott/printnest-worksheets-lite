@@ -165,6 +165,17 @@
           "${workspaceFolder}\\outputs\\number-words\\number_words_one_to_twenty.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Days of the Week",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_days_of_week_trace_and_write.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\days-of-week\\days_of_the_week_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }
