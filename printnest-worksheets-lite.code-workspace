@@ -176,6 +176,17 @@
           "${workspaceFolder}\\outputs\\days-of-week\\days_of_the_week_trace_and_write.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Months of the Year",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_months_of_year_trace_and_write.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\months-of-year\\months_of_the_year_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }
