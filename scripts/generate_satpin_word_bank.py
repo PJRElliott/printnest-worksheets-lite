@@ -27,7 +27,7 @@ BLUE = Color(28 / 255, 57 / 255, 86 / 255)
 GOLD = Color(214 / 255, 180 / 255, 105 / 255)
 LIGHT_GRAY = Color(0.94, 0.94, 0.94)
 SECTION_TITLE_SIZE = 15
-SECTION_GAP = 0.10 * inch
+SECTION_GAP = 0.20 * inch
 
 
 def register_fonts() -> None:
