@@ -9,11 +9,11 @@
   - two grey `cat` models;
   - the same two words in black;
   - six evenly spaced black `cat` words.
-- Final generated workbooks are in `outputs/trace-and-write`.
+- Final generated Short A, E, I, O, and U workbooks are in `outputs/trace-and-write`.
 
 ## Continue At Home
 
-Open `printnest-worksheets-lite.code-workspace` in VS Code. The workspace uses relative paths, selects the repository `.venv`, and includes tasks for regenerating the Short A and Short E PDFs.
+Open `printnest-worksheets-lite.code-workspace` in VS Code. The workspace uses relative paths, selects the repository `.venv`, and includes tasks for regenerating all five short-vowel PDFs.
 
 If the virtual environment does not exist after cloning, create it and install the project:
 
@@ -32,4 +32,4 @@ Replace `e` with the required vowel.
 
 ## Next Task
 
-Research curriculum-supported strict-CVC words for Short I, Short O, and Short U, update `skills/trace-and-write/references/cvc_word_families.json`, then generate their PDFs. Exclude blends, digraphs, silent letters, proper names, and four-phoneme `x` endings.
+The Short I, O, and U PDFs currently use the canonical lists already in the repository. Audit those three lists against curriculum-supported strict-CVC sources before locking their word coverage. Exclude blends, digraphs, silent letters, proper names, and four-phoneme `x` endings.

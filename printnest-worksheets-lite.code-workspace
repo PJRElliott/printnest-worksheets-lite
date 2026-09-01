@@ -46,6 +46,45 @@
           "${workspaceFolder}\\outputs\\trace-and-write\\short_e_trace_and_write.pdf"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Short I PDF",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\skills\\trace-and-write\\scripts\\generate_trace_and_write.py",
+          "--vowel",
+          "i",
+          "--output",
+          "${workspaceFolder}\\outputs\\trace-and-write\\short_i_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Generate Short O PDF",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\skills\\trace-and-write\\scripts\\generate_trace_and_write.py",
+          "--vowel",
+          "o",
+          "--output",
+          "${workspaceFolder}\\outputs\\trace-and-write\\short_o_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Generate Short U PDF",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\skills\\trace-and-write\\scripts\\generate_trace_and_write.py",
+          "--vowel",
+          "u",
+          "--output",
+          "${workspaceFolder}\\outputs\\trace-and-write\\short_u_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }
