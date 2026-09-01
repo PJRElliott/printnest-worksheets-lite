@@ -1,0 +1,65 @@
+{
+  "sections": [
+    {"title": "Basic CVCC Words", "structure": "CVCC", "words": [
+      "went", "it's", "help", "just", "tent", "belt", "hump", "band", "dent", "felt",
+      "gulp", "lamp", "wind", "land", "nest", "sink", "link", "hunt", "best", "tilt",
+      "lift", "lost", "tuft", "damp", "bust", "camp", "gift", "kept", "tusk", "limp",
+      "soft", "pond", "husk", "cost", "bank", "bunk", "fond", "gust", "hand", "next",
+      "milk", "golf", "jump", "fact", "melt"
+    ]},
+    {"title": "Phase 3 Grapheme CVCC Words", "structure": "CVCC", "words": [
+      "champ", "chest", "tenth", "theft", "Welsh", "chimp", "bench", "sixth", "punch",
+      "chunk", "thank", "shift", "shelf", "joint", "boost", "thump", "paint", "roast",
+      "toast", "beast", "think", "burnt"
+    ]},
+    {"title": "CVCC Polysyllabic Words", "structure": "polysyllabic CVCC", "words": [
+      "children", "helpdesk", "sandpit", "windmill", "softest", "pondweed", "desktop",
+      "helper", "handstand", "melting", "seventh", "shampoo", "giftbox", "shelter",
+      "lunchbox", "sandwich", "shelving", "chimpanzee", "champion", "thundering"
+    ]},
+    {"title": "Basic CCVC Words", "structure": "CCVC", "words": [
+      "from", "stop", "spot", "frog", "step", "plan", "speck", "trip", "grab", "track",
+      "spin", "flag", "grip", "glad", "twin", "sniff", "plum", "gran", "swim", "clap", "drop"
+    ]},
+    {"title": "Phase 3 Grapheme CCVC Words", "structure": "CCVC", "words": [
+      "green", "fresh", "steep", "tree", "spear", "smell", "spoil", "train", "spoon",
+      "sport", "thrush", "trash", "start", "flair", "trail", "cream", "clown", "star",
+      "creep", "brown", "stair", "spark", "bring", "crash", "bleed", "clear", "swing",
+      "droop", "float", "smart", "groan", "brush", "growl", "scoop", "frown", "speech",
+      "smear", "thrill"
+    ]},
+    {"title": "CCVC Polysyllabic Words", "structure": "polysyllabic CCVC", "words": [
+      "treetop", "starlight", "floating", "freshness"
+    ]},
+    {"title": "Complex Cluster Words", "structure": "CCVCC, CCCVC and CCCVCC", "words": [
+      "stand", "crisp", "trend", "trust", "spend", "glint", "twist", "brand", "frost",
+      "cramp", "plump", "stamp", "blend", "stunt", "crust", "tramp", "grunt", "crept",
+      "drift", "slept", "skunk", "blink", "drank", "blank", "trunk"
+    ]},
+    {"title": "Phase 3 Grapheme Complex Words", "structure": "complex clusters", "words": [
+      "crunch", "drench", "trench", "shrink", "thrust", "spring", "strap", "string",
+      "scrap", "street", "scrunch"
+    ]},
+    {"title": "Complex Polysyllabic Words", "structure": "polysyllabic complex clusters", "words": [
+      "driftwood", "twisting", "printer"
+    ]},
+    {"title": "Northern Pronunciation Extension", "structure": "accent-dependent", "words": [
+      "ask", "fast", "last", "daft", "task", "glass", "grass", "brass", "graft", "grant",
+      "blast", "grasp", "slant"
+    ]}
+  ],
+  "sets": [
+    {"id": "cvcc_basic", "title": "Phase 4 Basic CVCC", "sections": ["Basic CVCC Words"]},
+    {"id": "cvcc_phase3", "title": "Phase 4 CVCC with Phase 3 Graphemes", "sections": ["Phase 3 Grapheme CVCC Words"]},
+    {"id": "cvcc_polysyllabic", "title": "Phase 4 CVCC Polysyllabic", "sections": ["CVCC Polysyllabic Words"]},
+    {"id": "ccvc_basic", "title": "Phase 4 Basic CCVC", "sections": ["Basic CCVC Words"]},
+    {"id": "ccvc_phase3", "title": "Phase 4 CCVC with Phase 3 Graphemes", "sections": ["Phase 3 Grapheme CCVC Words"]},
+    {"id": "ccvc_polysyllabic", "title": "Phase 4 CCVC Polysyllabic", "sections": ["CCVC Polysyllabic Words"]},
+    {"id": "complex_clusters", "title": "Phase 4 Complex Clusters", "sections": ["Complex Cluster Words"]},
+    {"id": "complex_phase3", "title": "Phase 4 Complex Phase 3 Graphemes", "sections": ["Phase 3 Grapheme Complex Words"]},
+    {"id": "complex_polysyllabic", "title": "Phase 4 Complex Polysyllabic", "sections": ["Complex Polysyllabic Words"]},
+    {"id": "northern_extension", "title": "Phase 4 Northern Pronunciation Extension", "sections": ["Northern Pronunciation Extension"]}
+  ],
+  "excluded_proper_names": ["Chester", "Manchester", "Grinch"],
+  "source": "Letters and Sounds: Principles and Practice of High Quality Phonics, Phase Four, pages 126-127"
+}

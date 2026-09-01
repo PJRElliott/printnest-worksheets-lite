@@ -127,6 +127,24 @@
         "problemMatcher": []
       },
       {
+        "label": "Generate All Phase 4 Set Word Banks",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_phase4_word_bank.py"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Generate All Phase 4 Set Trace and Write PDFs",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_phase4_trace_and_write.py"
+        ],
+        "problemMatcher": []
+      },
+      {
         "label": "Generate Alphabet Trace and Write",
         "type": "process",
         "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
