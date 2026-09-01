@@ -227,6 +227,17 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     """word family の紹介＋全単語トレース"""
     draw_header(c, f"Word Family  ·  {family}",
                 f"Read and trace each {family} word.")
+    c.setFillColor(BLACK)
+    c.setFont("LeagueSpartan-Bold", 18)
+    c.drawCentredString(
+        PAGE_W / 2, PAGE_H - 0.5 * inch, "Trace and Write CVC Words"
+    )
+    c.setFont("LeagueSpartan-Regular", 10)
+    c.drawCentredString(
+        PAGE_W / 2,
+        PAGE_H - 0.72 * inch,
+        "Trace each word twice, then write it on your own.",
+    )
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = 10
     baselines = spread_rows(
