@@ -41,6 +41,7 @@ The CVC generator uses a print-first, monochrome worksheet system:
 - Render `assets/images/portrait-page-template.png` as the full-page background before drawing content. The template controls banner, footer, and outer padding; do not draw separate header or footer elements over it.
 - Distribute exercise rows vertically across the full safe content area, from below the banner to above the footer. Avoid layouts that cluster content in the upper half or leave an unnecessarily empty lower half.
 - Put exactly 10 four-line tracing strips on every CVC word-family tracing page. Cycle through the available family words when a family contains fewer than 10 words.
+- Keep exactly 0.35 inches of clear vertical space between adjacent tracing strips and center the ten-strip group within the shared safe area.
 - Do not number the tracing strips. Extend each handwriting guide across the full shared content width.
 - Above tracing strips, show the title `Trace and Write CVC Words` and the one-line instruction `Trace each word twice, then write it on your own.` inside the reserved area below the banner. This is the only exercise-page title/instruction exception.
 - Keep exercise content clear of the footer artwork.

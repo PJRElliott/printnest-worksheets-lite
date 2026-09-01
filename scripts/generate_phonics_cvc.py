@@ -35,6 +35,9 @@ CONTENT_TOP = PAGE_H - 1.0 * inch
 CONTENT_BOTTOM = 0.5 * inch
 CONTENT_LEFT = MARGIN
 CONTENT_RIGHT = PAGE_W - MARGIN
+TRACE_TOP_EXTENT = 0.44 * inch
+TRACE_BOTTOM_EXTENT = 0.22 * inch
+TRACE_GAP = 0.35 * inch
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -69,6 +72,16 @@ def spread_rows(count: int, top: float, bottom: float) -> list[float]:
         return [(top + bottom) / 2]
     step = (top - bottom) / (count - 1)
     return [top - i * step for i in range(count)]
+
+
+def tracing_strip_baselines(count: int) -> list[float]:
+    strip_height = TRACE_TOP_EXTENT + TRACE_BOTTOM_EXTENT
+    baseline_step = strip_height + TRACE_GAP
+    group_height = strip_height + (count - 1) * baseline_step
+    safe_height = CONTENT_TOP - CONTENT_BOTTOM
+    top_inset = max(0, (safe_height - group_height) / 2)
+    first_baseline = CONTENT_TOP - top_inset - TRACE_TOP_EXTENT
+    return [first_baseline - i * baseline_step for i in range(count)]
 
 FAMILIES = [
     ("-at", ["cat", "bat", "hat", "mat", "rat", "sat", "fat", "pat"]),
@@ -240,9 +253,7 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     )
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = 10
-    baselines = spread_rows(
-        show_count, CONTENT_TOP - 0.44 * inch, CONTENT_BOTTOM + 0.22 * inch
-    )
+    baselines = tracing_strip_baselines(show_count)
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, CONTENT_LEFT, CONTENT_RIGHT,
                    baseline_y, gap=0.22 * inch)
