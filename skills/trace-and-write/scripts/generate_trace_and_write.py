@@ -277,32 +277,36 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
 
     grey_baseline = PAGE_H - 4.15 * inch
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, grey_baseline + 0.82 * inch, "1. Grey Word")
+    pdf.drawString(CONTENT_LEFT, grey_baseline + 0.82 * inch, "1. Grey Words")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
         grey_baseline + 0.58 * inch,
-        "The word begins as a grey tracing model.",
+        "The two words begin as grey tracing models.",
     )
     draw_guide(pdf, grey_baseline)
     pdf.setFillColor(TRACE_GRAY)
     pdf.setFont("EduSABeginner-Regular", 34)
-    pdf.drawString(CONTENT_LEFT + 0.2 * inch, grey_baseline + 0.04 * inch, "cat")
+    example_first_x = CONTENT_LEFT + 0.2 * inch
+    example_second_x = CONTENT_LEFT + 1.62 * inch
+    pdf.drawString(example_first_x, grey_baseline + 0.04 * inch, "cat")
+    pdf.drawString(example_second_x, grey_baseline + 0.04 * inch, "cat")
 
     black_baseline = PAGE_H - 6.15 * inch
     pdf.setFillColor(black)
     pdf.setFont(title_font, 20)
-    pdf.drawString(CONTENT_LEFT, black_baseline + 0.82 * inch, "2. Traced Word")
+    pdf.drawString(CONTENT_LEFT, black_baseline + 0.82 * inch, "2. Traced Words")
     pdf.setFont(body_font, 10)
     pdf.drawString(
         CONTENT_LEFT,
         black_baseline + 0.58 * inch,
-        "The traced word is now shown in black.",
+        "The two traced words are now shown in black.",
     )
     draw_guide(pdf, black_baseline)
     pdf.setFillColor(black)
     pdf.setFont("EduSABeginner-Regular", 34)
-    pdf.drawString(CONTENT_LEFT + 0.2 * inch, black_baseline + 0.04 * inch, "cat")
+    pdf.drawString(example_first_x, black_baseline + 0.04 * inch, "cat")
+    pdf.drawString(example_second_x, black_baseline + 0.04 * inch, "cat")
 
     complete_baseline = PAGE_H - 8.15 * inch
     pdf.setFillColor(black)

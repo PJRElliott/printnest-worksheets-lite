@@ -14,7 +14,7 @@ python scripts/generate_trace_and_write.py
 - Use `--family at` to create one word-family worksheet, or omit it to create all families.
 - Use `--vowel a` to create one workbook containing every family for a selected short vowel.
 - Use `--output <path.pdf>` when the user specifies an output location.
-- Begin every generated PDF with the bundled instruction-page layout. Keep the directions brief and child-friendly, and show three handwriting strips: one grey model word, that word traced in black, and a completed row containing six evenly spaced black examples.
+- Begin every generated PDF with the bundled instruction-page layout. Keep the directions brief and child-friendly, and show three handwriting strips: two grey model words, those two words traced in black, and a completed row containing six evenly spaced black examples.
 - Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu SA Beginner only for the grey tracing words.
 - Show each family word exactly once with no repetition. Use one strip per unique word and continue families longer than ten words onto another page.
 - Pack complete family sections into unused page space by default. A following section includes its own title, instruction, and strips; start a new page when the complete section will not fit within the ten-position capacity.
