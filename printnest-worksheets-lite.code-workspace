@@ -196,6 +196,15 @@
           "${workspaceFolder}\\scripts\\generate_common_exception_words_trace_and_write.py"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate KS1 Fruit and Vegetable Words",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_ks1_fruit_and_vegetables_trace_and_write.py"
+        ],
+        "problemMatcher": []
       }
     ]
   }

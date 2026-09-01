@@ -1,0 +1,25 @@
+{
+  "age_range": "England Key Stage 1 (Years 1 and 2)",
+  "curriculum_url": "https://www.gov.uk/government/publications/national-curriculum-in-england-design-and-technology-programmes-of-study/national-curriculum-in-england-design-and-technology-programmes-of-study",
+  "health_guidance_url": "https://www.nhs.uk/healthier-families/food-facts/5-a-day/",
+  "sets": [
+    {
+      "id": "fruit",
+      "title": "Fruit Words",
+      "example": "apple",
+      "words": [
+        "apple", "banana", "orange", "pear", "grapes", "plum", "peach", "cherry", "melon", "lemon",
+        "lime", "mango", "kiwi", "apricot", "strawberry", "raspberry", "pineapple", "watermelon", "grapefruit", "satsuma"
+      ]
+    },
+    {
+      "id": "vegetables",
+      "title": "Vegetable Words",
+      "example": "carrot",
+      "words": [
+        "carrot", "peas", "beans", "onion", "leek", "garlic", "pepper", "tomato", "cucumber", "celery",
+        "lettuce", "cabbage", "broccoli", "spinach", "mushroom", "sweetcorn", "beetroot", "courgette", "cauliflower", "pumpkin"
+      ]
+    }
+  ]
+}
