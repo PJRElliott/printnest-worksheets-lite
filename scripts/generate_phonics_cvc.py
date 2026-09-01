@@ -33,6 +33,8 @@ PAGE_W, PAGE_H = A4
 MARGIN = 0.5 * inch
 CONTENT_TOP = PAGE_H - 1.5 * inch
 CONTENT_BOTTOM = 1.5 * inch
+CONTENT_LEFT = MARGIN
+CONTENT_RIGHT = PAGE_W - MARGIN
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -175,7 +177,7 @@ def page_copyright(c, meta: dict) -> None:
         "author. Cover illustration created with the help of AI image",
         "generation tools.",
     ]
-    y = CONTENT_TOP
+    y = CONTENT_TOP - 0.2 * inch
     for line in lines:
         c.drawCentredString(PAGE_W / 2, y, line)
         y -= 0.3 * inch
@@ -193,7 +195,7 @@ def page_howto(c) -> None:
         "4. -at words: cat, bat, hat, mat, rat, sat...",
         "5. Reading one word family makes the others easier!",
     ]
-    y = CONTENT_TOP
+    y = CONTENT_TOP - 0.2 * inch
     c.setFont("LeagueSpartan-Regular", 13)
     c.setFillColor(DARK)
     for s in steps:
@@ -201,17 +203,18 @@ def page_howto(c) -> None:
         y -= 0.40 * inch
     # 見本
     c.setFillColor(SOFT_BLUE)
-    c.roundRect(MARGIN + 0.3 * inch, 1.6 * inch, PAGE_W - 2 * MARGIN - 0.6 * inch,
+    c.roundRect(MARGIN + 0.3 * inch, CONTENT_BOTTOM, PAGE_W - 2 * MARGIN - 0.6 * inch,
                 1.6 * inch, 0.15 * inch, fill=1, stroke=0)
     c.setFillColor(DARK)
     c.setFont("LeagueSpartan-SemiBold", 14)
-    c.drawString(MARGIN + 0.55 * inch, 2.85 * inch, "Example  ·  -at family")
+    c.drawString(MARGIN + 0.55 * inch, CONTENT_BOTTOM + 1.25 * inch,
+                 "Example  ·  -at family")
     examples = ["cat", "bat", "hat", "mat", "rat", "sat"]
     c.setFont("LeagueSpartan-Bold", 22)
     for i, w in enumerate(examples):
         row, col = divmod(i, 3)
         x = MARGIN + 0.7 * inch + col * 2.0 * inch
-        y = 2.45 * inch - row * 0.55 * inch
+        y = CONTENT_BOTTOM + 0.85 * inch - row * 0.55 * inch
         c.setFillColor(DARK)
         c.drawString(x, y, w[0])
         c.setFillColor(PRIMARY)
@@ -226,15 +229,18 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
                 f"Read and trace each {family} word.")
     # 大きな family 表示
     c.setFillColor(SOFT_PURPLE)
-    c.roundRect(MARGIN, PAGE_H - 2.3 * inch, PAGE_W - 2 * MARGIN, 0.8 * inch,
+    c.roundRect(CONTENT_LEFT, CONTENT_TOP - 0.8 * inch,
+                CONTENT_RIGHT - CONTENT_LEFT, 0.8 * inch,
                 0.15 * inch, fill=1, stroke=0)
     c.setFillColor(PRIMARY)
     c.setFont("LeagueSpartan-ExtraBold", 56)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 2.05 * inch, family)
+    c.drawCentredString(PAGE_W / 2, CONTENT_TOP - 0.55 * inch, family)
 
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = min(len(words), 6)
-    baselines = spread_rows(show_count, PAGE_H - 3.0 * inch, CONTENT_BOTTOM)
+    baselines = spread_rows(
+        show_count, CONTENT_TOP - 1.45 * inch, CONTENT_BOTTOM + 0.22 * inch
+    )
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, MARGIN + 0.3 * inch, PAGE_W - MARGIN - 0.3 * inch,
                    baseline_y, gap=0.22 * inch)
@@ -262,7 +268,9 @@ def page_missing_letter(c, page_num: int, family: str, words: list[str],
     answers = []
     # 各行：[__]  a  t   ← 大きく描画
     show = min(len(words), 8)
-    baselines = spread_rows(show, CONTENT_TOP, CONTENT_BOTTOM)
+    baselines = spread_rows(
+        show, CONTENT_TOP - 0.5 * inch, CONTENT_BOTTOM + 0.05 * inch
+    )
     for i, baseline_y in enumerate(baselines):
         word = words[i]
         answers.append(word[0])
@@ -293,7 +301,9 @@ def page_mixed_review(c, page_num: int, rng: random.Random,
     draw_header(c, "Mixed Review  ·  Word Family Sort",
                 "Read the word, then circle its family ending.")
     items = rng.sample(all_words, 10)
-    row_positions = spread_rows(5, CONTENT_TOP, CONTENT_BOTTOM)
+    row_positions = spread_rows(
+        5, CONTENT_TOP - 0.4 * inch, CONTENT_BOTTOM + 0.04 * inch
+    )
     for i, (word, fam) in enumerate(items):
         row, col = divmod(i, 2)
         x0 = MARGIN + col * (PAGE_W - 2 * MARGIN) / 2
@@ -331,19 +341,22 @@ def page_build_word(c, page_num: int, family: str, letters: list[str]) -> None:
                 f"Add a letter at the start to make {family} family words.")
     # ヘッダー: [__]  a t  → make as many as you can
     c.setFillColor(SOFT_YELLOW)
-    c.roundRect(MARGIN, PAGE_H - 2.3 * inch, PAGE_W - 2 * MARGIN, 0.8 * inch,
+    c.roundRect(CONTENT_LEFT, CONTENT_TOP - 0.8 * inch,
+                CONTENT_RIGHT - CONTENT_LEFT, 0.8 * inch,
                 0.15 * inch, fill=1, stroke=0)
     c.setFillColor(DARK)
     c.setFont("LeagueSpartan-ExtraBold", 42)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 2.05 * inch,
+    c.drawCentredString(PAGE_W / 2, CONTENT_TOP - 0.55 * inch,
                         f"_ _   +   {family}   =   ?")
     # 候補文字
     c.setFillColor(DARK)
     c.setFont("LeagueSpartan-SemiBold", 14)
-    c.drawString(MARGIN + 0.3 * inch, PAGE_H - 2.65 * inch,
+    c.drawString(MARGIN + 0.3 * inch, CONTENT_TOP - 1.15 * inch,
                  "Try these letters:  " + " · ".join(letters))
     # 書き欄 8つ
-    row_positions = spread_rows(4, PAGE_H - 3.3 * inch, CONTENT_BOTTOM)
+    row_positions = spread_rows(
+        4, CONTENT_TOP - 1.8 * inch, CONTENT_BOTTOM + 0.05 * inch
+    )
     for i in range(8):
         row, col = divmod(i, 2)
         x = MARGIN + 0.5 * inch + col * 3.4 * inch
@@ -368,7 +381,7 @@ def page_answers(c, page_num: int, items: list) -> None:
     """items: [(page_label, [(question, answer), ...]), ...]"""
     draw_header(c, "Answer Key",
                 "Here are the answers for each Mixed Review page.")
-    y = CONTENT_TOP
+    y = CONTENT_TOP - 0.2 * inch
     for label, pairs in items:
         c.setFillColor(PRIMARY)
         c.setFont("LeagueSpartan-Bold", 12)
@@ -380,7 +393,7 @@ def page_answers(c, page_num: int, items: list) -> None:
             c.drawString(MARGIN + 0.3 * inch, y, f"{q}  →  {a}")
             y -= 0.20 * inch
         y -= 0.15 * inch
-        if y < MARGIN + 0.8 * inch:
+        if y < CONTENT_BOTTOM:
             break
     draw_footer(c, page_num)
     c.showPage()
