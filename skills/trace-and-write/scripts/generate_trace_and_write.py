@@ -252,7 +252,7 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
 
     pdf.setFillColor(black)
     pdf.setFont(title_font, instruction_title_size)
-    pdf.drawString(CONTENT_LEFT, title_y, "How to Use This Worksheet")
+    pdf.drawString(CONTENT_LEFT, title_y, "How to Use This Workbook")
     pdf.setFont(body_font, 14)
     pdf.drawString(
         CONTENT_LEFT,
