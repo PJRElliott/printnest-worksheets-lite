@@ -90,7 +90,7 @@ def tracing_strip_baselines(count: int) -> list[float]:
     return [first_baseline - i * baseline_step for i in range(count)]
 
 
-def draw_tracing_heading(c, first_strip_top: float) -> None:
+def draw_tracing_heading(c, first_strip_top: float, family: str) -> None:
     title_font = "LeagueSpartan-Bold"
     instruction_font = "LeagueSpartan-Regular"
     title_ascent, title_descent = pdfmetrics.getAscentDescent(
@@ -113,7 +113,9 @@ def draw_tracing_heading(c, first_strip_top: float) -> None:
 
     c.setFillColor(BLACK)
     c.setFont(title_font, TRACING_TITLE_SIZE)
-    c.drawCentredString(PAGE_W / 2, title_baseline, "Trace and Write Words")
+    c.drawCentredString(
+        PAGE_W / 2, title_baseline, f"Trace and Write {family} Family Words"
+    )
     c.setFont(instruction_font, TRACING_INSTRUCTION_SIZE)
     c.drawCentredString(
         PAGE_W / 2,
@@ -281,7 +283,7 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
     # 単語をトレース行に配置（4本罫線 × N行）
     show_count = len(words)
     baselines = tracing_strip_baselines(show_count)
-    draw_tracing_heading(c, baselines[0] + TRACE_TOP_EXTENT)
+    draw_tracing_heading(c, baselines[0] + TRACE_TOP_EXTENT, family)
     for i, baseline_y in enumerate(baselines):
         draw_4line(c, CONTENT_LEFT, CONTENT_RIGHT,
                    baseline_y, gap=0.22 * inch)

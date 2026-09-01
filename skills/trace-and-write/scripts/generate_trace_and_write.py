@@ -65,7 +65,7 @@ def tracing_strip_baselines(count: int = 10) -> list[float]:
     return [first - index * step for index in range(count)]
 
 
-def draw_heading(pdf: canvas.Canvas, first_strip_top: float) -> None:
+def draw_heading(pdf: canvas.Canvas, first_strip_top: float, family: str) -> None:
     title_font = "LeagueSpartan-Bold"
     instruction_font = "LeagueSpartan-Regular"
     title_ascent, title_descent = pdfmetrics.getAscentDescent(title_font, TITLE_SIZE)
@@ -86,7 +86,9 @@ def draw_heading(pdf: canvas.Canvas, first_strip_top: float) -> None:
 
     pdf.setFillColor(black)
     pdf.setFont(title_font, TITLE_SIZE)
-    pdf.drawCentredString(PAGE_W / 2, title_y, "Trace and Write Words")
+    pdf.drawCentredString(
+        PAGE_W / 2, title_y, f"Trace and Write -{family} Family Words"
+    )
     pdf.setFont(instruction_font, INSTRUCTION_SIZE)
     pdf.drawCentredString(
         PAGE_W / 2,
@@ -114,10 +116,10 @@ def draw_guide(pdf: canvas.Canvas, baseline: float) -> None:
     pdf.setDash(1, 0)
 
 
-def draw_page(pdf: canvas.Canvas, words: list[str]) -> None:
+def draw_page(pdf: canvas.Canvas, family: str, words: list[str]) -> None:
     pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
     baselines = tracing_strip_baselines(len(words))
-    draw_heading(pdf, baselines[0] + TRACE_TOP_EXTENT)
+    draw_heading(pdf, baselines[0] + TRACE_TOP_EXTENT, family)
 
     for index, baseline in enumerate(baselines):
         draw_guide(pdf, baseline)
@@ -170,7 +172,7 @@ def main() -> None:
     for family in selected:
         words = FAMILIES[family]
         for start in range(0, len(words), 10):
-            draw_page(pdf, words[start:start + 10])
+            draw_page(pdf, family, words[start:start + 10])
             page_count += 1
     pdf.save()
     print(f"Created {args.output} ({page_count} page(s))")
