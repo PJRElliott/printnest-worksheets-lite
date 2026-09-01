@@ -43,7 +43,7 @@ The CVC generator uses a print-first, monochrome worksheet system:
 - Put exactly 10 four-line tracing strips on every CVC word-family tracing page. Cycle through the available family words when a family contains fewer than 10 words.
 - Keep exactly 0.35 inches of clear vertical space between adjacent tracing strips and center the ten-strip group within the shared safe area.
 - Do not number the tracing strips. Extend each handwriting guide across the full shared content width.
-- Position the second traced word dynamically so the visible gap is 75% of the original fixed-position gap, accounting for each word's rendered width.
+- Position the second traced word dynamically so the visible gap is 60% of the original fixed-position gap, accounting for each word's rendered width.
 - Above tracing strips, show the title `Trace and Write CVC Words` and the one-line instruction `Trace each word twice, then write it on your own.` inside the reserved area below the banner. This is the only exercise-page title/instruction exception.
 - Set the tracing title in 22-point League Spartan Bold and its instruction in 10-point League Spartan Regular. Keep 0.08 inches between those lines, then use embedded font metrics to split the remaining outer space evenly above and below the combined heading.
 - Keep exercise content clear of the footer artwork.

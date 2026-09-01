@@ -42,6 +42,7 @@ BANNER_BOTTOM = PAGE_H - PAGE_H * 115 / 5999
 TRACING_TITLE_SIZE = 22
 TRACING_INSTRUCTION_SIZE = 10
 TRACING_LINE_GAP = 0.08 * inch
+TRACE_WORD_GAP_SCALE = 0.60
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -291,7 +292,7 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
         old_second_word_x = MARGIN + 2.0 * inch
         first_word_width = pdfmetrics.stringWidth(word, "LeagueSpartan-Bold", 34)
         old_gap = old_second_word_x - first_word_x - first_word_width
-        second_word_x = first_word_x + first_word_width + old_gap * 0.75
+        second_word_x = first_word_x + first_word_width + old_gap * TRACE_WORD_GAP_SCALE
         c.drawString(first_word_x, baseline_y + 0.04 * inch, word)
         c.drawString(second_word_x, baseline_y + 0.04 * inch, word)
         # 残りは空白（自由に書く）
