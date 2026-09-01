@@ -182,7 +182,8 @@ def draw_singleton_page(
 def draw_section_heading(
     pdf: canvas.Canvas,
     previous_baseline: float,
-    family: str,
+    family: str | None = None,
+    title_override: str | None = None,
 ) -> float:
     title_font = "LeagueSpartan-Bold"
     instruction_font = "LeagueSpartan-Regular"
@@ -207,8 +208,9 @@ def draw_section_heading(
 
     pdf.setFillColor(black)
     pdf.setFont(title_font, TITLE_SIZE)
+    title = title_override or f"-{family} Family Words"
     pdf.drawString(
-        CONTENT_LEFT, title_y, f"-{family} Family Words"
+        CONTENT_LEFT, title_y, title
     )
     pdf.setFont(instruction_font, INSTRUCTION_SIZE)
     pdf.drawString(
@@ -331,15 +333,25 @@ def draw_instruction_page(pdf: canvas.Canvas) -> None:
 
 
 def draw_packed_page(
-    pdf: canvas.Canvas, sections: list[tuple[str, list[str]]]
+    pdf: canvas.Canvas,
+    sections: list[tuple[str, list[str]]],
+    title_builder=None,
 ) -> None:
+    if title_builder is None:
+        title_builder = lambda family: f"-{family} Family Words"
     pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
     step = TRACE_TOP_EXTENT + TRACE_BOTTOM_EXTENT + TRACE_GAP
     baseline = tracing_strip_baselines(MAX_TRACE_STRIPS)[0]
-    draw_heading(pdf, baseline + TRACE_TOP_EXTENT, sections[0][0])
+    draw_heading(
+        pdf,
+        baseline + TRACE_TOP_EXTENT,
+        title_override=title_builder(sections[0][0]),
+    )
     for section_index, (family, words) in enumerate(sections):
         if section_index:
-            baseline = draw_section_heading(pdf, baseline, family)
+            baseline = draw_section_heading(
+                pdf, baseline, title_override=title_builder(family)
+            )
         for word_index, word in enumerate(words):
             if word_index:
                 baseline -= step
