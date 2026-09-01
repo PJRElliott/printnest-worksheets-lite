@@ -39,8 +39,9 @@ TRACE_TOP_EXTENT = 0.44 * inch
 TRACE_BOTTOM_EXTENT = 0.22 * inch
 TRACE_GAP = 0.35 * inch
 BANNER_BOTTOM = PAGE_H - PAGE_H * 115 / 5999
-TRACING_TITLE_SIZE = 18
+TRACING_TITLE_SIZE = 22
 TRACING_INSTRUCTION_SIZE = 10
+TRACING_LINE_GAP = 0.08 * inch
 
 BLACK = black
 LIGHT_GRAY = Color(0.82, 0.82, 0.82)
@@ -99,11 +100,13 @@ def draw_tracing_heading(c, first_strip_top: float) -> None:
     title_height = title_ascent - title_descent
     instruction_height = instruction_ascent - instruction_descent
     available_space = BANNER_BOTTOM - first_strip_top
-    clear_gap = (available_space - title_height - instruction_height) / 3
+    outer_gap = (
+        available_space - title_height - instruction_height - TRACING_LINE_GAP
+    ) / 2
 
-    title_baseline = BANNER_BOTTOM - clear_gap - title_ascent
+    title_baseline = BANNER_BOTTOM - outer_gap - title_ascent
     instruction_baseline = (
-        title_baseline + title_descent - clear_gap - instruction_ascent
+        title_baseline + title_descent - TRACING_LINE_GAP - instruction_ascent
     )
 
     c.setFillColor(BLACK)
