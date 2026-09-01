@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -37,21 +38,10 @@ MID_GRAY = Color(0.55, 0.55, 0.55)
 TRACE_GRAY = Color(0.72, 0.72, 0.72)
 FONT_DIR = SKILL_DIR / "assets" / "fonts"
 PAGE_TEMPLATE = SKILL_DIR / "assets" / "images" / "portrait-page-template.png"
-
-FAMILIES = {
-    "at": ["cat", "bat", "hat", "mat", "rat", "sat", "fat", "pat"],
-    "an": ["man", "pan", "ran", "tan", "van", "can", "fan"],
-    "en": ["hen", "pen", "ten", "den", "men"],
-    "et": ["jet", "pet", "wet", "get", "net", "let", "set", "vet"],
-    "in": ["pin", "win", "fin", "tin", "bin", "kin"],
-    "ip": ["zip", "lip", "tip", "dip", "hip", "rip", "sip"],
-    "it": ["sit", "bit", "fit", "hit", "kit", "lit", "pit"],
-    "og": ["dog", "log", "fog", "jog", "hog", "bog"],
-    "op": ["top", "hop", "mop", "pop", "cop", "shop"],
-    "ot": ["hot", "pot", "dot", "got", "lot", "not", "rot"],
-    "ub": ["cub", "hub", "rub", "tub", "sub", "pub"],
-    "un": ["bun", "fun", "run", "sun", "gun"],
-}
+WORD_FAMILIES_PATH = SKILL_DIR / "references" / "cvc_word_families.json"
+FAMILIES: dict[str, list[str]] = json.loads(
+    WORD_FAMILIES_PATH.read_text(encoding="utf-8")
+)
 
 
 def register_fonts() -> None:
