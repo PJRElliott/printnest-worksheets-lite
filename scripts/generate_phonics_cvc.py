@@ -47,6 +47,7 @@ DARK = BLACK
 
 FONT_DIR = SKILL_DIR / "assets" / "fonts"
 FOOTER_IMAGE = SKILL_DIR / "assets" / "images" / "portrait-footer.png"
+BANNER_IMAGE = SKILL_DIR / "assets" / "images" / "portrait-banner.png"
 FONTS = {
     "LeagueSpartan-Regular": "LeagueSpartan-Regular.ttf",
     "LeagueSpartan-SemiBold": "LeagueSpartan-SemiBold.ttf",
@@ -82,19 +83,26 @@ def load_meta(book: str) -> dict:
     )
 
 
-def draw_header(c, title: str, subtitle: str = "") -> None:
-    return None
+def draw_header(c, title: str = "", subtitle: str = "") -> None:
+    c.drawImage(
+        str(BANNER_IMAGE),
+        0,
+        PAGE_H - 0.16 * inch,
+        width=PAGE_W,
+        height=0.16 * inch,
+        mask="auto",
+    )
 
 
 def draw_footer(c, page_num: int) -> None:
     with Image.open(FOOTER_IMAGE) as source:
         artwork = source.crop(source.getbbox())
-        width = 4.0 * inch
+        width = PAGE_W
         height = width * artwork.height / artwork.width
         c.drawImage(
             ImageReader(artwork),
-            (PAGE_W - width) / 2,
-            0.22 * inch,
+            0,
+            0.12 * inch,
             width=width,
             height=height,
             mask="auto",
@@ -123,6 +131,7 @@ def draw_4line(c, x_left, x_right, baseline_y, gap=0.28 * inch) -> None:
 
 
 def page_cover(c, meta: dict) -> None:
+    draw_header(c)
     c.setFillColor(SOFT_PURPLE)
     c.rect(0, PAGE_H - 1.3 * inch, PAGE_W, 1.3 * inch, fill=1, stroke=0)
     c.setFillColor(SOFT_YELLOW)
@@ -169,6 +178,7 @@ def page_cover(c, meta: dict) -> None:
 
 
 def page_copyright(c, meta: dict) -> None:
+    draw_header(c)
     c.setFont("LeagueSpartan-Regular", 11)
     c.setFillColor(DARK)
     lines = [

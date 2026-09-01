@@ -35,7 +35,8 @@ The CVC generator uses a print-first, monochrome worksheet system:
 - Do not add worksheet headers, subtitles, divider rules, page numbers, or student-name footers.
 - Use the bundled League Spartan Regular, Semibold, Bold, and ExtraBold fonts for all text.
 - Keep worksheet text and rules black; use gray only for letters intended to be traced.
-- Render `assets/images/portrait-footer.png` at the bottom of every page, preserving its aspect ratio and transparent background.
+- Render `assets/images/portrait-banner.png` as a thin, edge-to-edge strip at the top of every page.
+- Render `assets/images/portrait-footer.png` edge-to-edge at the bottom of every page, preserving its aspect ratio and transparent background.
 - Keep exercise content clear of the footer artwork.
 
 Or just ask Claude:
