@@ -13,6 +13,15 @@
 
 ## Continue At Home
 
+Open `printnest-worksheets-lite.code-workspace` in VS Code. The workspace uses relative paths, selects the repository `.venv`, and includes tasks for regenerating the Short A and Short E PDFs.
+
+If the virtual environment does not exist after cloning, create it and install the project:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+```
+
 Create or refresh a vowel workbook from the repository root:
 
 ```powershell

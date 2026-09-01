@@ -1,0 +1,52 @@
+{
+  "folders": [
+    {
+      "name": "PrintNest Worksheets Lite",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Generate Short A PDF",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\skills\\trace-and-write\\scripts\\generate_trace_and_write.py",
+          "--vowel",
+          "a",
+          "--output",
+          "${workspaceFolder}\\outputs\\trace-and-write\\short_a_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Generate Short E PDF",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\skills\\trace-and-write\\scripts\\generate_trace_and_write.py",
+          "--vowel",
+          "e",
+          "--output",
+          "${workspaceFolder}\\outputs\\trace-and-write\\short_e_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
+      }
+    ]
+  }
+}
