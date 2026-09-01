@@ -62,7 +62,7 @@ FONTS = {
     "LeagueSpartan-SemiBold": "LeagueSpartan-SemiBold.ttf",
     "LeagueSpartan-Bold": "LeagueSpartan-Bold.ttf",
     "LeagueSpartan-ExtraBold": "LeagueSpartan-ExtraBold.ttf",
-    "EduAUVICWANTPre-Regular": "EduAUVICWANTPre-Regular.ttf",
+    "EduSABeginner-Regular": "EduSABeginner-Regular.ttf",
 }
 
 
@@ -288,11 +288,11 @@ def page_family_intro(c, page_num: int, family: str, words: list[str]) -> None:
         # トレース文字（薄）×2
         word = words[i % len(words)]
         c.setFillColor(TRACE_GRAY)
-        c.setFont("EduAUVICWANTPre-Regular", 34)
+        c.setFont("EduSABeginner-Regular", 34)
         first_word_x = MARGIN + 0.2 * inch
         old_second_word_x = MARGIN + 2.0 * inch
         first_word_width = pdfmetrics.stringWidth(
-            word, "EduAUVICWANTPre-Regular", 34
+            word, "EduSABeginner-Regular", 34
         )
         old_gap = old_second_word_x - first_word_x - first_word_width
         second_word_x = first_word_x + first_word_width + old_gap * TRACE_WORD_GAP_SCALE

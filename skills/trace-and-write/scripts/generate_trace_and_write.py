@@ -50,8 +50,8 @@ def register_fonts() -> None:
         pdfmetrics.registerFont(TTFont(font_name, str(FONT_DIR / f"{font_name}.ttf")))
     pdfmetrics.registerFont(
         TTFont(
-            "EduAUVICWANTPre-Regular",
-            str(FONT_DIR / "EduAUVICWANTPre-Regular.ttf"),
+            "EduSABeginner-Regular",
+            str(FONT_DIR / "EduSABeginner-Regular.ttf"),
         )
     )
 
@@ -124,11 +124,11 @@ def draw_page(pdf: canvas.Canvas, words: list[str]) -> None:
         word = words[index % len(words)]
         first_x = CONTENT_LEFT + 0.2 * inch
         old_second_x = CONTENT_LEFT + 2.0 * inch
-        width = pdfmetrics.stringWidth(word, "EduAUVICWANTPre-Regular", 34)
+        width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
         old_gap = old_second_x - first_x - width
         second_x = first_x + width + old_gap * TRACE_WORD_GAP_SCALE
         pdf.setFillColor(TRACE_GRAY)
-        pdf.setFont("EduAUVICWANTPre-Regular", 34)
+        pdf.setFont("EduSABeginner-Regular", 34)
         pdf.drawString(first_x, baseline + 0.04 * inch, word)
         pdf.drawString(second_x, baseline + 0.04 * inch, word)
     pdf.showPage()
