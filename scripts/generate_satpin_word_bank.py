@@ -26,6 +26,8 @@ RIGHT = PAGE_W - 0.5 * inch
 BLUE = Color(28 / 255, 57 / 255, 86 / 255)
 GOLD = Color(214 / 255, 180 / 255, 105 / 255)
 LIGHT_GRAY = Color(0.94, 0.94, 0.94)
+SECTION_TITLE_SIZE = 15
+SECTION_GAP = 0.10 * inch
 
 
 def register_fonts() -> None:
@@ -68,12 +70,16 @@ def draw_section(
     columns: int = 5,
 ) -> float:
     pdf.setFillColor(BLUE)
-    pdf.setFont("LeagueSpartan-Bold", 15)
+    pdf.setFont("LeagueSpartan-Bold", SECTION_TITLE_SIZE)
     pdf.drawString(LEFT, top, title)
     pdf.setFillColor(black)
     pdf.setFont("LeagueSpartan-Regular", 9)
     pdf.drawString(LEFT, top - 0.22 * inch, note)
-    return draw_word_grid(pdf, words, top - 0.30 * inch, columns) - 0.22 * inch
+    grid_bottom = draw_word_grid(pdf, words, top - 0.30 * inch, columns)
+    next_title_ascent = pdfmetrics.getAscent(
+        "LeagueSpartan-Bold", SECTION_TITLE_SIZE
+    )
+    return grid_bottom - SECTION_GAP - next_title_ascent
 
 
 def generate(output: Path) -> None:
@@ -100,7 +106,10 @@ def generate(output: Path) -> None:
         pdf.setFont("LeagueSpartan-Bold", 25)
         pdf.drawCentredString(x + letter_w / 2, letters_y + 0.16 * inch, letter)
 
-    y = letters_y - 0.38 * inch
+    section_title_ascent = pdfmetrics.getAscent(
+        "LeagueSpartan-Bold", SECTION_TITLE_SIZE
+    )
+    y = letters_y - SECTION_GAP - section_title_ascent
     y = draw_section(
         pdf,
         "Core Set 1-2 Words",
