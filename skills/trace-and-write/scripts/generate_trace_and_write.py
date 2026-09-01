@@ -90,7 +90,7 @@ def draw_heading(pdf: canvas.Canvas, first_strip_top: float) -> None:
 
     pdf.setFillColor(black)
     pdf.setFont(title_font, TITLE_SIZE)
-    pdf.drawCentredString(PAGE_W / 2, title_y, "Trace and Write CVC Words")
+    pdf.drawCentredString(PAGE_W / 2, title_y, "Trace and Write Words")
     pdf.setFont(instruction_font, INSTRUCTION_SIZE)
     pdf.drawCentredString(
         PAGE_W / 2,

@@ -112,7 +112,7 @@ def draw_tracing_heading(c, first_strip_top: float) -> None:
 
     c.setFillColor(BLACK)
     c.setFont(title_font, TRACING_TITLE_SIZE)
-    c.drawCentredString(PAGE_W / 2, title_baseline, "Trace and Write CVC Words")
+    c.drawCentredString(PAGE_W / 2, title_baseline, "Trace and Write Words")
     c.setFont(instruction_font, TRACING_INSTRUCTION_SIZE)
     c.drawCentredString(
         PAGE_W / 2,
