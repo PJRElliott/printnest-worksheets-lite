@@ -12,6 +12,7 @@ python scripts/generate_trace_and_write.py
 ```
 
 - Use `--family at` to create one word-family page, or omit it to create all 35 pages.
+- Use `--vowel a` to create one workbook containing every family for a selected short vowel.
 - Use `--output <path.pdf>` when the user specifies an output location.
 - Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu SA Beginner only for the grey tracing words.
 - Keep ten unnumbered strips on every page, repeating family words as needed.

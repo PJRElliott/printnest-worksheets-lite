@@ -136,7 +136,13 @@ def draw_page(pdf: canvas.Canvas, words: list[str]) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--family", choices=FAMILIES, help="Generate one family page")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--family", choices=FAMILIES, help="Generate one family page")
+    selection.add_argument(
+        "--vowel",
+        choices=("a", "e", "i", "o", "u"),
+        help="Generate every family for one short vowel",
+    )
     parser.add_argument(
         "--output",
         type=Path,
@@ -154,7 +160,12 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     register_fonts()
     pdf = canvas.Canvas(str(args.output), pagesize=A4)
-    selected = [args.family] if args.family else list(FAMILIES)
+    if args.family:
+        selected = [args.family]
+    elif args.vowel:
+        selected = [family for family in FAMILIES if family.startswith(args.vowel)]
+    else:
+        selected = list(FAMILIES)
     for family in selected:
         draw_page(pdf, FAMILIES[family])
     pdf.save()
