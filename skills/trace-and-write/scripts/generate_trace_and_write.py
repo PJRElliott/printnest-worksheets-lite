@@ -232,6 +232,73 @@ def draw_word_strip(pdf: canvas.Canvas, baseline: float, word: str) -> None:
     pdf.drawString(second_x, baseline + 0.04 * inch, word)
 
 
+def draw_instruction_page(pdf: canvas.Canvas) -> None:
+    pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
+    title_font = "LeagueSpartan-Bold"
+    body_font = "LeagueSpartan-Regular"
+    title_ascent, _ = pdfmetrics.getAscentDescent(title_font, TITLE_SIZE)
+    title_y = BANNER_BOTTOM - 0.254 * inch - title_ascent
+
+    pdf.setFillColor(black)
+    pdf.setFont(title_font, TITLE_SIZE)
+    pdf.drawString(CONTENT_LEFT, title_y, "How to Use This Worksheet")
+    pdf.setFont(body_font, 12)
+    pdf.drawString(
+        CONTENT_LEFT,
+        title_y - 0.34 * inch,
+        "Trace each grey word twice, then write the word once on your own.",
+    )
+
+    steps_y = title_y - 0.95 * inch
+    pdf.setFont(title_font, 14)
+    pdf.drawString(CONTENT_LEFT, steps_y, "1. Trace")
+    pdf.setFont(body_font, 11)
+    pdf.drawString(CONTENT_LEFT + 0.95 * inch, steps_y, "Follow the grey letters carefully.")
+    pdf.setFont(title_font, 14)
+    pdf.drawString(CONTENT_LEFT, steps_y - 0.38 * inch, "2. Write")
+    pdf.setFont(body_font, 11)
+    pdf.drawString(
+        CONTENT_LEFT + 0.95 * inch,
+        steps_y - 0.38 * inch,
+        "Copy the word in the empty space.",
+    )
+    pdf.setFont(title_font, 14)
+    pdf.drawString(CONTENT_LEFT, steps_y - 0.76 * inch, "3. Read")
+    pdf.setFont(body_font, 11)
+    pdf.drawString(
+        CONTENT_LEFT + 0.95 * inch,
+        steps_y - 0.76 * inch,
+        "Say each sound, then read the whole word.",
+    )
+
+    before_baseline = PAGE_H - 4.55 * inch
+    pdf.setFont(title_font, 18)
+    pdf.drawString(CONTENT_LEFT, before_baseline + 0.82 * inch, "Before")
+    pdf.setFont(body_font, 10)
+    pdf.drawString(
+        CONTENT_LEFT,
+        before_baseline + 0.58 * inch,
+        "The final writing space is empty.",
+    )
+    draw_word_strip(pdf, before_baseline, "cat")
+
+    after_baseline = PAGE_H - 7.05 * inch
+    pdf.setFillColor(black)
+    pdf.setFont(title_font, 18)
+    pdf.drawString(CONTENT_LEFT, after_baseline + 0.82 * inch, "After")
+    pdf.setFont(body_font, 10)
+    pdf.drawString(
+        CONTENT_LEFT,
+        after_baseline + 0.58 * inch,
+        "The word has been written independently.",
+    )
+    draw_word_strip(pdf, after_baseline, "cat")
+    pdf.setFillColor(black)
+    pdf.setFont("EduSABeginner-Regular", 34)
+    pdf.drawString(CONTENT_LEFT + 4.0 * inch, after_baseline + 0.04 * inch, "cat")
+    pdf.showPage()
+
+
 def draw_packed_page(
     pdf: canvas.Canvas, sections: list[tuple[str, list[str]]]
 ) -> None:
@@ -285,13 +352,14 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     register_fonts()
     pdf = canvas.Canvas(str(args.output), pagesize=A4)
+    draw_instruction_page(pdf)
     if args.family:
         selected = [args.family]
     elif args.vowel:
         selected = [family for family in FAMILIES if family.startswith(args.vowel)]
     else:
         selected = list(FAMILIES)
-    page_count = 0
+    page_count = 1
     if args.pack_families or (not args.family and not args.merge_singletons):
         sections = [
             (family, FAMILIES[family][start:start + MAX_TRACE_STRIPS])
