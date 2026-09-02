@@ -12,9 +12,14 @@
       "file": "../../zoo-animals-pencil/crocodile.png",
       "role": "long, low animal simplification reference",
       "sha256": "86c933bc4b41c02f034f3f62e69f4474d6f5bafa85c03e9e8f251cca0f7285c0"
+    },
+    {
+      "file": "../../farm-animals-blue-gold/cow.png",
+      "role": "standing farm-mammal simplification and palette reference",
+      "sha256": "b8862bfe0e773dbf616cb2c739835e7aa5ecda912618a71979b454d2ef656307"
     }
   ],
-  "approval_note": "The user approved both drawing styles; baked checkerboard backgrounds were removed deterministically without redrawing the animals.",
+  "approval_note": "The user approved the gorilla, crocodile, and cow drawing styles; generated backgrounds were removed deterministically without redrawing the animals.",
   "references": [
     "global-texture-zoo-scene.png",
     "global-side-zebra.png",
