@@ -22,9 +22,14 @@
       "file": "../../farm-animals-blue-gold/hen.png",
       "role": "standing bird simplification, feather detail, and palette reference",
       "sha256": "0fc7504e8b2a7b4b15bf5166de2c228d8057c3fb43cec393c062ba413b1eca86"
+    },
+    {
+      "file": "../../farm-animals-blue-gold/pig.png",
+      "role": "rounded farm-mammal simplification, pink pencil fill, and navy trotter reference",
+      "sha256": "af16590c12c9ca0d7e0d62e48e5d8aea90003c79024711c176428c1ea55f5c29"
     }
   ],
-  "approval_note": "The user approved the gorilla, crocodile, cow, and hen drawing styles; generated backgrounds were removed deterministically without redrawing the animals.",
+  "approval_note": "The user approved the gorilla, crocodile, cow, hen, and pig drawing styles; generated backgrounds were removed deterministically without redrawing the animals.",
   "references": [
     "global-texture-zoo-scene.png",
     "global-side-zebra.png",
