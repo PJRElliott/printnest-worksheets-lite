@@ -18,6 +18,7 @@ Last checked: 2 September 2026
 | Year 1 common exception words | 45 England National Curriculum words | `outputs/common-exception-words/year_1_common_exception_words_trace_and_write.pdf` |
 | Year 2 common exception words | 64 England National Curriculum words | `outputs/common-exception-words/year_2_common_exception_words_trace_and_write.pdf` |
 | Fruit and vegetables | 20 fruit words and 20 vegetable words | `outputs/fruit-and-vegetables/` |
+| Farm animals | Cow, pig, hen, duck, sheep, goat, horse and donkey with black-and-white line art | `outputs/farm-animals/farm_animals_trace_and_write.pdf` |
 
 ## Product Rules
 
@@ -34,7 +35,6 @@ Last checked: 2 September 2026
 - Weather
 - Seasons
 - Body parts
-- Farm animals
 - Wild animals
 - Pets
 - Minibeasts

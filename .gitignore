@@ -4,5 +4,7 @@ __pycache__/
 *.pyc
 *.pyo
 .venv/
+.venv-home/
 venv/
 .env
+licensed-assets/

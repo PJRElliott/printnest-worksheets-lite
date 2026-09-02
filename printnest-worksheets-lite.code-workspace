@@ -216,6 +216,17 @@
           "${workspaceFolder}\\scripts\\generate_ks1_fruit_and_vegetables_trace_and_write.py"
         ],
         "problemMatcher": []
+      },
+      {
+        "label": "Generate Farm Animal Words",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_farm_animals_trace_and_write.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\farm-animals\\farm_animals_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
       }
     ]
   }
