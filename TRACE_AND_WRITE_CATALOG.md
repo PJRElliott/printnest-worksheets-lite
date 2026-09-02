@@ -18,7 +18,7 @@ Last checked: 2 September 2026
 | Year 1 common exception words | 45 England National Curriculum words | `outputs/common-exception-words/year_1_common_exception_words_trace_and_write.pdf` |
 | Year 2 common exception words | 64 England National Curriculum words | `outputs/common-exception-words/year_2_common_exception_words_trace_and_write.pdf` |
 | Fruit and vegetables | 20 fruit words and 20 vegetable words | `outputs/fruit-and-vegetables/` |
-| Farm animals | Cow, pig, hen, duck, sheep, goat, horse and donkey with black-and-white line art | `outputs/farm-animals/farm_animals_trace_and_write.pdf` |
+| Farm animals | Cow, pig, hen, duck, sheep, goat, horse and donkey with blue-and-gold illustrations | `outputs/farm-animals/farm_animals_trace_and_write.pdf` |
 
 ## Product Rules
 
@@ -26,8 +26,8 @@ Last checked: 2 September 2026
 - Practice pages use no more than ten fixed handwriting strips.
 - Every word, numeral or other non-letter target has two complete handwriting strips; a ten-strip page therefore contains no more than five unique targets.
 - Alphabet practice uses one uppercase strip and one lowercase strip for each letter.
-- Illustrations, when used, must be consistent black-and-white line art only.
-- Colour, grayscale rendering, kawaii, realistic and photorealistic imagery are not permitted.
+- Illustrations must use a consistent approved style and requested palette.
+- Kawaii, realistic and photorealistic imagery are not permitted.
 
 ## Not Yet Created
 

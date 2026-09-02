@@ -15,7 +15,7 @@ from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parent.parent
 GENERATOR_PATH = ROOT / "skills" / "trace-and-write" / "scripts" / "generate_trace_and_write.py"
-ASSET_DIR = ROOT / "licensed-assets" / "farm-animals"
+ASSET_DIR = ROOT / "assets" / "farm-animals-blue-gold"
 FARM_ANIMALS = ["cow", "pig", "hen", "duck", "sheep", "goat", "horse", "donkey"]
 
 
@@ -31,7 +31,7 @@ def load_generator():
 def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, animal: str) -> None:
     image_path = ASSET_DIR / f"{animal}.png"
     if not image_path.exists():
-        raise FileNotFoundError(f"Missing licensed farm-animal image: {image_path}")
+        raise FileNotFoundError(f"Missing farm-animal image: {image_path}")
 
     generator.draw_guide(pdf, baseline)
     image_size = 0.55 * inch
@@ -57,7 +57,7 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
         height=image_size,
         preserveAspectRatio=True,
         anchor="c",
-        mask="auto",
+        mask=[245, 255, 245, 255, 245, 255],
     )
 
     first_x = generator.CONTENT_LEFT + 0.72 * inch
