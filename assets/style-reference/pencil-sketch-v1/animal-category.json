@@ -24,7 +24,8 @@
     "subjects": 1,
     "view": "use the clearest natural view for the species",
     "framing": "close, centred, complete full body with no cropping",
-    "background": "transparent outside the animal",
+    "generation_background": "solid chroma green, normalised to exact #00FF00 for review and extraction",
+    "approved_asset_background": "genuinely transparent outside the animal",
     "ground_or_shadow": false,
     "decorations": false
   },
@@ -34,6 +35,11 @@
     "texture": "light visible pencil grain, sparse short contour marks, and very limited delicate cross-hatching",
     "colour": "softly layered and restrained",
     "proportions": "friendly, simplified, natural, and recognisable without anatomical over-detail"
+  },
+  "background_workflow": {
+    "review_copy": "Place the candidate on a perfectly uniform #00FF00 background so the exterior can be keyed reliably.",
+    "final_copy": "Remove the green background and save the approved worksheet asset as RGBA with real transparency.",
+    "preservation": "Keep enclosed white and light areas inside the animal opaque; remove only the connected exterior background."
   },
   "prohibited": [
     "kawaii",
