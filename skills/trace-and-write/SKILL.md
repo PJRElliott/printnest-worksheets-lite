@@ -20,6 +20,7 @@ python scripts/generate_trace_and_write.py
 - Keep illustrations consistent with the approved source or supplied style reference. Colour is permitted when requested. For the Word Made Easy blue-and-gold style, use navy `#193A63`, gold `#E1AE43`, and white `#FFFFFF`; do not substitute black outlines or introduce other colours. Do not use kawaii, realistic, or photorealistic imagery.
 - In the blue-and-gold animal style, all hooves and pig trotters must be solid navy `#193A63`, never gold.
 - Place every illustration on an opaque white background so handwriting guides or other page elements never show through the image area.
+- Trim excess background whitespace when placing an illustration, then scale the visible artwork proportionally to fit the full reserved square between the upper and lower handwriting guides. Do not crop the subject.
 - In paired practice strips, show the illustration on the first strip only; keep the second strip image-free and full width.
 - Show each target word once in the word list, but provide two complete handwriting strips for that word. A ten-strip page therefore holds no more than five unique words.
 - For alphabet practice only, provide one strip for the uppercase letter and one strip for the lowercase letter.

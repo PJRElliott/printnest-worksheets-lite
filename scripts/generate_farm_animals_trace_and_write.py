@@ -5,11 +5,14 @@ from __future__ import annotations
 
 import argparse
 import importlib.util
+from io import BytesIO
 from pathlib import Path
 
+from PIL import Image, ImageChops
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
+from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
 
 
@@ -28,29 +31,51 @@ def load_generator():
     return module
 
 
+def cropped_image_reader(image_path: Path) -> ImageReader:
+    image = Image.open(image_path).convert("RGB")
+    white = Image.new("RGB", image.size, "white")
+    difference = ImageChops.difference(image, white).convert("L")
+    difference = difference.point(lambda value: 255 if value > 10 else 0)
+    bounds = difference.getbbox()
+    if bounds:
+        padding = max(8, round(min(image.size) * 0.015))
+        left, top, right, bottom = bounds
+        bounds = (
+            max(0, left - padding),
+            max(0, top - padding),
+            min(image.width, right + padding),
+            min(image.height, bottom + padding),
+        )
+        image = image.crop(bounds)
+    buffer = BytesIO()
+    image.save(buffer, format="PNG")
+    buffer.seek(0)
+    return ImageReader(buffer)
+
+
 def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, animal: str) -> None:
     image_path = ASSET_DIR / f"{animal}.png"
     if not image_path.exists():
         raise FileNotFoundError(f"Missing farm-animal image: {image_path}")
 
     generator.draw_guide(pdf, baseline)
-    image_size = 0.55 * inch
+    image_size = generator.TRACE_TOP_EXTENT + generator.TRACE_BOTTOM_EXTENT
     image_x = generator.CONTENT_LEFT + 0.03 * inch
-    image_y = baseline - 0.16 * inch
+    image_y = baseline - generator.TRACE_BOTTOM_EXTENT
     pdf.saveState()
     pdf.setFillColorRGB(1, 1, 1)
     pdf.setStrokeColorRGB(1, 1, 1)
     pdf.rect(
-        image_x - 0.04 * inch,
-        image_y - 0.04 * inch,
-        image_size + 0.08 * inch,
-        image_size + 0.08 * inch,
+        image_x - 0.02 * inch,
+        image_y,
+        image_size + 0.04 * inch,
+        image_size,
         fill=1,
         stroke=0,
     )
     pdf.restoreState()
     pdf.drawImage(
-        str(image_path),
+        cropped_image_reader(image_path),
         image_x,
         image_y,
         width=image_size,
@@ -60,7 +85,7 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
         mask=[245, 255, 245, 255, 245, 255],
     )
 
-    first_x = generator.CONTENT_LEFT + 0.72 * inch
+    first_x = generator.CONTENT_LEFT + 0.85 * inch
     word_width = pdfmetrics.stringWidth(animal, "EduSABeginner-Regular", 34)
     second_x = first_x + word_width + 0.35 * inch
     pdf.setFillColor(generator.TRACE_GRAY)
