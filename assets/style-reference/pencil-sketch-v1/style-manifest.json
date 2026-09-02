@@ -15,7 +15,8 @@
     },
     {
       "file": "global-texture-zoo-scene.png",
-      "role": "master palette, pencil texture, contour, hatching, and overall visual character",
+      "type": "cover_scene",
+      "role": "master cover-sheet reference for palette, pencil texture, contour, hatching, grouped composition, dashed paths, stars, motion marks, and decorative scene details",
       "sha256": "f20b79b0c4003fb0af03fbdbed863bc36346539ffae36c3cd52fc9d9ed9c59da"
     }
   ],
@@ -25,6 +26,8 @@
       "global-side-zebra.png",
       "global-three-quarter-lion.png"
     ],
-    "rule": "Use these unchanged masters as style references. Never replace an anchor with an unapproved generated image."
+    "rule": "Use these unchanged masters as style references. Never replace an anchor with an unapproved generated image.",
+    "cover_scene_rule": "Use global-texture-zoo-scene.png as the composition and decoration reference for cover sheets. Its dashed paths, stars, motion marks, plants, and grouped scene elements belong to cover artwork.",
+    "isolated_asset_rule": "For individual worksheet assets, inherit only the pencil medium, line treatment, texture, and palette from the cover scene. Do not copy its scenery, dashed paths, stars, motion marks, plants, or other decorative elements."
   }
 }
