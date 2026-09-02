@@ -62,14 +62,16 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
     image_size = generator.TRACE_TOP_EXTENT + generator.TRACE_BOTTOM_EXTENT
     image_x = generator.CONTENT_LEFT + 0.03 * inch
     image_y = baseline - generator.TRACE_BOTTOM_EXTENT
+    first_x = generator.CONTENT_LEFT + 0.85 * inch
+    background_bleed = 0.02 * inch
     pdf.saveState()
     pdf.setFillColorRGB(1, 1, 1)
     pdf.setStrokeColorRGB(1, 1, 1)
     pdf.rect(
-        image_x - 0.02 * inch,
-        image_y,
-        image_size + 0.04 * inch,
-        image_size,
+        generator.CONTENT_LEFT - background_bleed,
+        image_y - background_bleed,
+        first_x - generator.CONTENT_LEFT + background_bleed,
+        image_size + 2 * background_bleed,
         fill=1,
         stroke=0,
     )
@@ -85,7 +87,6 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
         mask=[245, 255, 245, 255, 245, 255],
     )
 
-    first_x = generator.CONTENT_LEFT + 0.85 * inch
     word_width = pdfmetrics.stringWidth(animal, "EduSABeginner-Regular", 34)
     second_x = first_x + word_width + 0.35 * inch
     pdf.setFillColor(generator.TRACE_GRAY)
