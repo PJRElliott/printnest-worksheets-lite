@@ -81,8 +81,13 @@ def draw_practice_page(pdf: canvas.Canvas, generator, animals: list[str]) -> Non
         title_override="Farm Animal Words",
         instruction_override="Trace each word twice, then continue writing on your own.",
     )
-    for baseline, animal in zip(baselines, generator.repeat_for_practice(animals)):
-        draw_illustrated_strip(pdf, generator, baseline, animal)
+    for index, (baseline, animal) in enumerate(
+        zip(baselines, generator.repeat_for_practice(animals))
+    ):
+        if index % generator.PRACTICE_STRIPS_PER_TARGET == 0:
+            draw_illustrated_strip(pdf, generator, baseline, animal)
+        else:
+            generator.draw_word_strip(pdf, baseline, animal)
     pdf.showPage()
 
 

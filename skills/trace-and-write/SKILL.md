@@ -19,6 +19,7 @@ python scripts/generate_trace_and_write.py
 - Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu SA Beginner only for the grey tracing words.
 - When adding illustrations, use only consistent black-and-white line art from the approved asset source. Do not use colour, grayscale rendering, kawaii, realistic, or photorealistic imagery.
 - Place every illustration on an opaque white background so handwriting guides or other page elements never show through the image area.
+- In paired practice strips, show the illustration on the first strip only; keep the second strip image-free and full width.
 - Show each target word once in the word list, but provide two complete handwriting strips for that word. A ten-strip page therefore holds no more than five unique words.
 - For alphabet practice only, provide one strip for the uppercase letter and one strip for the lowercase letter.
 - Pack complete family sections into unused page space by default. A following section includes its own title, instruction, and strips; start a new page when the complete section will not fit within the ten-position capacity.
