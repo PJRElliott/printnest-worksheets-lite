@@ -55,7 +55,7 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
     pdf.drawString(second_x, baseline + 0.04 * inch, animal)
 
 
-def draw_practice_page(pdf: canvas.Canvas, generator) -> None:
+def draw_practice_page(pdf: canvas.Canvas, generator, animals: list[str]) -> None:
     pdf.drawImage(
         str(generator.PAGE_TEMPLATE), 0, 0,
         width=generator.PAGE_W, height=generator.PAGE_H, mask="auto",
@@ -67,7 +67,7 @@ def draw_practice_page(pdf: canvas.Canvas, generator) -> None:
         title_override="Farm Animal Words",
         instruction_override="Trace each word twice, then continue writing on your own.",
     )
-    for baseline, animal in zip(baselines, FARM_ANIMALS):
+    for baseline, animal in zip(baselines, generator.repeat_for_practice(animals)):
         draw_illustrated_strip(pdf, generator, baseline, animal)
     pdf.showPage()
 
@@ -78,10 +78,16 @@ def generate(output: Path) -> None:
     generator.register_fonts()
     pdf = canvas.Canvas(str(output), pagesize=A4)
     generator.draw_instruction_page(pdf)
-    draw_practice_page(pdf, generator)
+    for start in range(0, len(FARM_ANIMALS), generator.TARGETS_PER_PAGE):
+        draw_practice_page(
+            pdf,
+            generator,
+            FARM_ANIMALS[start:start + generator.TARGETS_PER_PAGE],
+        )
     pdf.save()
     generator.insert_canonical_instruction_page(output)
-    print(f"Created {output} (2 page(s))")
+    page_count = 1 + (len(FARM_ANIMALS) + generator.TARGETS_PER_PAGE - 1) // generator.TARGETS_PER_PAGE
+    print(f"Created {output} ({page_count} page(s))")
 
 
 def main() -> None:

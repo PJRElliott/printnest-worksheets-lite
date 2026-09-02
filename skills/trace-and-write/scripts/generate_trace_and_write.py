@@ -34,6 +34,8 @@ INSTRUCTION_SIZE = 10
 TITLE_INSTRUCTION_GAP = 0.08 * inch
 TRACE_WORD_GAP_SCALE = 0.60
 MAX_TRACE_STRIPS = 10
+PRACTICE_STRIPS_PER_TARGET = 2
+TARGETS_PER_PAGE = MAX_TRACE_STRIPS // PRACTICE_STRIPS_PER_TARGET
 
 MID_GRAY = Color(0.55, 0.55, 0.55)
 TRACE_GRAY = Color(0.72, 0.72, 0.72)
@@ -67,6 +69,10 @@ def tracing_strip_baselines(count: int = MAX_TRACE_STRIPS) -> list[float]:
     top_inset = max(0, (CONTENT_TOP - CONTENT_BOTTOM - group_height) / 2)
     first = CONTENT_TOP - top_inset - TRACE_TOP_EXTENT
     return [first - index * step for index in range(count)]
+
+
+def repeat_for_practice(items: list[str]) -> list[str]:
+    return [item for item in items for _ in range(PRACTICE_STRIPS_PER_TARGET)]
 
 
 def draw_heading(
@@ -132,12 +138,13 @@ def draw_guide(pdf: canvas.Canvas, baseline: float) -> None:
 
 def draw_page(pdf: canvas.Canvas, family: str, words: list[str]) -> None:
     pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
-    baselines = tracing_strip_baselines(len(words))
+    practice_words = repeat_for_practice(words)
+    baselines = tracing_strip_baselines(len(practice_words))
     draw_heading(pdf, baselines[0] + TRACE_TOP_EXTENT, family)
 
     for index, baseline in enumerate(baselines):
         draw_guide(pdf, baseline)
-        word = words[index]
+        word = practice_words[index]
         first_x = CONTENT_LEFT + 0.2 * inch
         old_second_x = CONTENT_LEFT + 2.0 * inch
         width = pdfmetrics.stringWidth(word, "EduSABeginner-Regular", 34)
@@ -157,14 +164,15 @@ def draw_singleton_page(
     pdf: canvas.Canvas, families: list[tuple[str, str]], vowel: str
 ) -> None:
     pdf.drawImage(str(PAGE_TEMPLATE), 0, 0, width=PAGE_W, height=PAGE_H, mask="auto")
-    baselines = tracing_strip_baselines(len(families))
+    practice_families = [item for item in families for _ in range(PRACTICE_STRIPS_PER_TARGET)]
+    baselines = tracing_strip_baselines(len(practice_families))
     draw_heading(
         pdf,
         baselines[0] + TRACE_TOP_EXTENT,
         title_override=f"Short {vowel.upper()} Words",
     )
 
-    for baseline, (family, word) in zip(baselines, families):
+    for baseline, (family, word) in zip(baselines, practice_families):
         draw_guide(pdf, baseline)
         pdf.setFillColor(black)
         pdf.setFont("LeagueSpartan-Bold", 12)
@@ -382,7 +390,7 @@ def draw_packed_page(
             baseline = draw_section_heading(
                 pdf, baseline, title_override=title_builder(family)
             )
-        for word_index, word in enumerate(words):
+        for word_index, word in enumerate(repeat_for_practice(words)):
             if word_index:
                 baseline -= step
             draw_word_strip(pdf, baseline, word)
@@ -435,18 +443,18 @@ def main() -> None:
     page_count = 1
     if args.pack_families or (not args.family and not args.merge_singletons):
         sections = [
-            (family, FAMILIES[family][start:start + MAX_TRACE_STRIPS])
+            (family, FAMILIES[family][start:start + TARGETS_PER_PAGE])
             for family in selected
-            for start in range(0, len(FAMILIES[family]), MAX_TRACE_STRIPS)
+            for start in range(0, len(FAMILIES[family]), TARGETS_PER_PAGE)
         ]
         pages: list[list[tuple[str, list[str]]]] = []
         used = 0
         for section in sections:
-            cost = len(section[1]) + (1 if used else 0)
+            cost = len(section[1]) * PRACTICE_STRIPS_PER_TARGET + (1 if used else 0)
             if used and used + cost > MAX_TRACE_STRIPS:
                 pages.append([])
                 used = 0
-                cost = len(section[1])
+                cost = len(section[1]) * PRACTICE_STRIPS_PER_TARGET
             if not pages or not pages[-1]:
                 if not pages or pages[-1]:
                     pages.append([])
@@ -465,13 +473,13 @@ def main() -> None:
         if args.merge_singletons and len(words) == 1:
             singletons.append((family, words[0]))
             continue
-        for start in range(0, len(words), 10):
-            draw_page(pdf, family, words[start:start + 10])
+        for start in range(0, len(words), TARGETS_PER_PAGE):
+            draw_page(pdf, family, words[start:start + TARGETS_PER_PAGE])
             page_count += 1
-    for start in range(0, len(singletons), MAX_TRACE_STRIPS):
+    for start in range(0, len(singletons), TARGETS_PER_PAGE):
         draw_singleton_page(
             pdf,
-            singletons[start:start + MAX_TRACE_STRIPS],
+            singletons[start:start + TARGETS_PER_PAGE],
             args.vowel or singletons[start][0][0],
         )
         page_count += 1

@@ -92,7 +92,7 @@ def draw_letter_page(pdf: canvas.Canvas, generator, uppercase: str) -> None:
         height=generator.PAGE_H,
         mask="auto",
     )
-    baselines = generator.tracing_strip_baselines(generator.MAX_TRACE_STRIPS)
+    baselines = generator.tracing_strip_baselines(2)
     generator.draw_heading(
         pdf,
         baselines[0] + generator.TRACE_TOP_EXTENT,
@@ -100,7 +100,7 @@ def draw_letter_page(pdf: canvas.Canvas, generator, uppercase: str) -> None:
         instruction_override="Trace each grey letter twice, then continue writing on your own.",
     )
     for index, baseline in enumerate(baselines):
-        letter = uppercase if index < 5 else lowercase
+        letter = uppercase if index == 0 else lowercase
         draw_letter_examples(pdf, generator, baseline, letter * 2, generator.TRACE_GRAY)
     pdf.showPage()
 

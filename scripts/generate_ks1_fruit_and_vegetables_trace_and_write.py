@@ -78,7 +78,7 @@ def draw_word_page(pdf: canvas.Canvas, generator, title: str, words: list[str]) 
         title_override=title,
         instruction_override="Trace each word twice, then continue writing on your own.",
     )
-    for baseline, word in zip(baselines, words):
+    for baseline, word in zip(baselines, generator.repeat_for_practice(words)):
         generator.draw_word_strip(pdf, baseline, word)
     pdf.showPage()
 
@@ -89,8 +89,8 @@ def generate_set(generator, item: dict) -> Path:
     pdf = canvas.Canvas(str(output), pagesize=A4)
     generator.draw_instruction_page(pdf)
     words = item["words"]
-    for start in range(0, len(words), generator.MAX_TRACE_STRIPS):
-        draw_word_page(pdf, generator, item["title"], words[start:start + generator.MAX_TRACE_STRIPS])
+    for start in range(0, len(words), generator.TARGETS_PER_PAGE):
+        draw_word_page(pdf, generator, item["title"], words[start:start + generator.TARGETS_PER_PAGE])
     pdf.save()
     generator.insert_canonical_instruction_page(output)
     print(f"Created {output}")

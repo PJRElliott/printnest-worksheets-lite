@@ -85,7 +85,7 @@ def draw_number_page(pdf: canvas.Canvas, generator, number: int, word: str) -> N
         str(generator.PAGE_TEMPLATE), 0, 0,
         width=generator.PAGE_W, height=generator.PAGE_H, mask="auto",
     )
-    baselines = generator.tracing_strip_baselines(generator.MAX_TRACE_STRIPS)
+    baselines = generator.tracing_strip_baselines(generator.PRACTICE_STRIPS_PER_TARGET)
     generator.draw_heading(
         pdf,
         baselines[0] + generator.TRACE_TOP_EXTENT,

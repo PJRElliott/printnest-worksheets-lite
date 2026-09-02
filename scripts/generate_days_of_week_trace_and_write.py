@@ -80,7 +80,7 @@ def draw_instruction_page(pdf: canvas.Canvas, generator) -> None:
     pdf.showPage()
 
 
-def draw_days_page(pdf: canvas.Canvas, generator) -> None:
+def draw_days_page(pdf: canvas.Canvas, generator, days: list[str]) -> None:
     pdf.drawImage(
         str(generator.PAGE_TEMPLATE), 0, 0,
         width=generator.PAGE_W, height=generator.PAGE_H, mask="auto",
@@ -92,7 +92,7 @@ def draw_days_page(pdf: canvas.Canvas, generator) -> None:
         title_override="Days of the Week",
         instruction_override="Trace each day twice, then continue writing on your own.",
     )
-    for baseline, day in zip(baselines, DAYS):
+    for baseline, day in zip(baselines, generator.repeat_for_practice(days)):
         generator.draw_word_strip(pdf, baseline, day)
     pdf.showPage()
 
@@ -103,10 +103,12 @@ def generate(output: Path) -> None:
     generator.register_fonts()
     pdf = canvas.Canvas(str(output), pagesize=A4)
     draw_instruction_page(pdf, generator)
-    draw_days_page(pdf, generator)
+    for start in range(0, len(DAYS), generator.TARGETS_PER_PAGE):
+        draw_days_page(pdf, generator, DAYS[start:start + generator.TARGETS_PER_PAGE])
     pdf.save()
     generator.insert_canonical_instruction_page(output)
-    print(f"Created {output} (2 page(s))")
+    page_count = 1 + (len(DAYS) + generator.TARGETS_PER_PAGE - 1) // generator.TARGETS_PER_PAGE
+    print(f"Created {output} ({page_count} page(s))")
 
 
 def main() -> None:

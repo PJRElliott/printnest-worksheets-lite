@@ -24,7 +24,8 @@ Last checked: 2 September 2026
 
 - Every workbook starts with `skills/trace-and-write/assets/canonical_instruction_page.pdf`.
 - Practice pages use no more than ten fixed handwriting strips.
-- Words are included once unless a product intentionally repeats one target across a full practice page.
+- Every word, numeral or other non-letter target has two complete handwriting strips; a ten-strip page therefore contains no more than five unique targets.
+- Alphabet practice uses one uppercase strip and one lowercase strip for each letter.
 - Illustrations, when used, must be consistent black-and-white line art only.
 - Colour, grayscale rendering, kawaii, realistic and photorealistic imagery are not permitted.
 

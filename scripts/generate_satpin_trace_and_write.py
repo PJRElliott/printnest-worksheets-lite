@@ -32,7 +32,7 @@ def load_generator():
     return module
 
 
-def build_sections(data: dict[str, object]) -> list[tuple[str, list[str]]]:
+def build_sections(data: dict[str, object], generator) -> list[tuple[str, list[str]]]:
     groups = [
         ("Core SATPIN Words", data["official_regular"]),
         ("Pronunciation Support", data["pronunciation_attention"]),
@@ -41,33 +41,33 @@ def build_sections(data: dict[str, object]) -> list[tuple[str, list[str]]]:
         ("Adjacent-Consonant Words", data["adjacent_consonant_extension"]),
     ]
     return [
-        (title, words[start:start + 10])
+        (title, words[start:start + generator.TARGETS_PER_PAGE])
         for title, words in groups
-        for start in range(0, len(words), 10)
+        for start in range(0, len(words), generator.TARGETS_PER_PAGE)
     ]
 
 
 def pack_sections(
-    sections: list[tuple[str, list[str]]], capacity: int
+    sections: list[tuple[str, list[str]]], capacity: int, generator
 ) -> list[list[tuple[str, list[str]]]]:
     pages: list[list[tuple[str, list[str]]]] = []
     used = 0
     for section in sections:
-        cost = len(section[1]) + (1 if used else 0)
+        cost = len(section[1]) * generator.PRACTICE_STRIPS_PER_TARGET + (1 if used else 0)
         if used and used + cost > capacity:
             used = 0
         if not pages or used == 0:
             pages.append([])
         pages[-1].append(section)
-        used += len(section[1]) + (1 if len(pages[-1]) > 1 else 0)
+        used += len(section[1]) * generator.PRACTICE_STRIPS_PER_TARGET + (1 if len(pages[-1]) > 1 else 0)
     return pages
 
 
 def generate(output: Path) -> None:
     generator = load_generator()
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
-    sections = build_sections(data)
-    pages = pack_sections(sections, generator.MAX_TRACE_STRIPS)
+    sections = build_sections(data, generator)
+    pages = pack_sections(sections, generator.MAX_TRACE_STRIPS, generator)
 
     output.parent.mkdir(parents=True, exist_ok=True)
     generator.register_fonts()

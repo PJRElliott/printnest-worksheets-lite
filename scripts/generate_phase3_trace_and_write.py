@@ -32,33 +32,37 @@ def load_generator():
     return module
 
 
-def build_sections(sections: list[dict[str, object]]) -> list[tuple[str, list[str]]]:
+def build_sections(sections: list[dict[str, object]], generator) -> list[tuple[str, list[str]]]:
     return [
-        (section["title"], section["words"][start:start + 10])
+        (section["title"], section["words"][start:start + generator.TARGETS_PER_PAGE])
         for section in sections
-        for start in range(0, len(section["words"]), 10)
+        for start in range(0, len(section["words"]), generator.TARGETS_PER_PAGE)
     ]
 
 
 def pack_sections(
-    sections: list[tuple[str, list[str]]], capacity: int
+    sections: list[tuple[str, list[str]]], capacity: int, generator
 ) -> list[list[tuple[str, list[str]]]]:
     pages: list[list[tuple[str, list[str]]]] = []
     used = 0
     for section in sections:
-        cost = len(section[1]) + (1 if used else 0)
+        cost = len(section[1]) * generator.PRACTICE_STRIPS_PER_TARGET + (1 if used else 0)
         if used and used + cost > capacity:
             used = 0
         if not pages or used == 0:
             pages.append([])
         pages[-1].append(section)
-        used += len(section[1]) + (1 if len(pages[-1]) > 1 else 0)
+        used += len(section[1]) * generator.PRACTICE_STRIPS_PER_TARGET + (1 if len(pages[-1]) > 1 else 0)
     return pages
 
 
 def generate(output: Path, sections: list[dict[str, object]]) -> None:
     generator = load_generator()
-    pages = pack_sections(build_sections(sections), generator.MAX_TRACE_STRIPS)
+    pages = pack_sections(
+        build_sections(sections, generator),
+        generator.MAX_TRACE_STRIPS,
+        generator,
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     generator.register_fonts()
     pdf = canvas.Canvas(str(output), pagesize=A4)

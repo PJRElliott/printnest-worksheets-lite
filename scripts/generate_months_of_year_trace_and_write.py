@@ -87,7 +87,7 @@ def draw_months_page(pdf: canvas.Canvas, generator, months: list[str]) -> None:
         title_override="Months of the Year",
         instruction_override="Trace each month twice, then continue writing on your own.",
     )
-    for baseline, month in zip(baselines, months):
+    for baseline, month in zip(baselines, generator.repeat_for_practice(months)):
         generator.draw_word_strip(pdf, baseline, month)
     pdf.showPage()
 
@@ -98,8 +98,8 @@ def generate(output: Path) -> None:
     generator.register_fonts()
     pdf = canvas.Canvas(str(output), pagesize=A4)
     draw_instruction_page(pdf, generator)
-    for start in range(0, len(MONTHS), generator.MAX_TRACE_STRIPS):
-        draw_months_page(pdf, generator, MONTHS[start:start + generator.MAX_TRACE_STRIPS])
+    for start in range(0, len(MONTHS), generator.TARGETS_PER_PAGE):
+        draw_months_page(pdf, generator, MONTHS[start:start + generator.TARGETS_PER_PAGE])
     pdf.save()
     generator.insert_canonical_instruction_page(output)
     print(f"Created {output} (3 page(s))")
