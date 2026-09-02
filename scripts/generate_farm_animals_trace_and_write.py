@@ -35,10 +35,24 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
 
     generator.draw_guide(pdf, baseline)
     image_size = 0.55 * inch
+    image_x = generator.CONTENT_LEFT + 0.03 * inch
+    image_y = baseline - 0.16 * inch
+    pdf.saveState()
+    pdf.setFillColorRGB(1, 1, 1)
+    pdf.setStrokeColorRGB(1, 1, 1)
+    pdf.rect(
+        image_x - 0.04 * inch,
+        image_y - 0.04 * inch,
+        image_size + 0.08 * inch,
+        image_size + 0.08 * inch,
+        fill=1,
+        stroke=0,
+    )
+    pdf.restoreState()
     pdf.drawImage(
         str(image_path),
-        generator.CONTENT_LEFT + 0.03 * inch,
-        baseline - 0.16 * inch,
+        image_x,
+        image_y,
         width=image_size,
         height=image_size,
         preserveAspectRatio=True,
