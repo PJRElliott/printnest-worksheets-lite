@@ -1,0 +1,22 @@
+{
+  "locale": "en-GB",
+  "audience": "EYFS and KS1 (ages 4-7)",
+  "curriculum_note": "England guidance develops colour exploration and colour-mixing vocabulary but does not prescribe a fixed list of colour names.",
+  "colours": [
+    {"word": "red", "hex": "#E53935", "group": "primary"},
+    {"word": "orange", "hex": "#F57C00", "group": "secondary"},
+    {"word": "yellow", "hex": "#FBC02D", "group": "primary"},
+    {"word": "green", "hex": "#43A047", "group": "secondary"},
+    {"word": "blue", "hex": "#2878C7", "group": "primary"},
+    {"word": "purple", "hex": "#7048A8", "group": "secondary"},
+    {"word": "pink", "hex": "#EC5A9B", "group": "common"},
+    {"word": "brown", "hex": "#8B5A2B", "group": "common"},
+    {"word": "black", "hex": "#111111", "group": "neutral"},
+    {"word": "white", "hex": "#FFFFFF", "group": "neutral"},
+    {"word": "grey", "hex": "#808080", "group": "neutral"}
+  ],
+  "sources": [
+    "https://www.gov.uk/government/publications/development-matters--2/development-matters",
+    "https://www.gov.uk/government/publications/national-curriculum-in-england-art-and-design-programmes-of-study"
+  ]
+}
