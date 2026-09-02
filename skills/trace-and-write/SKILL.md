@@ -5,6 +5,8 @@ description: Generate printable A4 CVC trace-and-write worksheet PDFs with ten h
 
 # Trace and Write
 
+Treat the layout, typography, palette, illustration placement, strip count, and alphabet exception below as locked defaults. Do not change them unless the user explicitly requests that specific rule to change.
+
 Generate the requested worksheet with the bundled deterministic script:
 
 ```powershell
