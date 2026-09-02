@@ -8,6 +8,7 @@ Last checked: 2 September 2026
 | --- | --- | --- |
 | Alphabet | Uppercase and lowercase A-Z | `outputs/alphabet/alphabet_trace_and_write.pdf` |
 | Number words | One to twenty | `outputs/number-words/number_words_one_to_twenty.pdf` |
+| Numbers | Numerals 1 to 10 | `outputs/numbers/numbers_1_to_10_trace_and_write.pdf` |
 | Days of the week | Monday to Sunday | `outputs/days-of-week/days_of_the_week_trace_and_write.pdf` |
 | Months of the year | January to December | `outputs/months-of-year/months_of_the_year_trace_and_write.pdf` |
 | Short-vowel CVC words | Short a, e, i, o and u word families | `outputs/short-vowels/` |

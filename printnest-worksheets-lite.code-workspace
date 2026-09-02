@@ -167,6 +167,17 @@
         "problemMatcher": []
       },
       {
+        "label": "Generate Numbers 1 to 10",
+        "type": "process",
+        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+        "args": [
+          "${workspaceFolder}\\scripts\\generate_numbers_one_to_ten_trace_and_write.py",
+          "--output",
+          "${workspaceFolder}\\outputs\\numbers\\numbers_1_to_10_trace_and_write.pdf"
+        ],
+        "problemMatcher": []
+      },
+      {
         "label": "Generate Days of the Week",
         "type": "process",
         "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
