@@ -8,7 +8,7 @@ import importlib.util
 from io import BytesIO
 from pathlib import Path
 
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw, ImageOps
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
@@ -35,8 +35,18 @@ def cropped_image_reader(image_path: Path) -> ImageReader:
     image = Image.open(image_path).convert("RGB")
     white = Image.new("RGB", image.size, "white")
     difference = ImageChops.difference(image, white).convert("L")
-    difference = difference.point(lambda value: 255 if value > 10 else 0)
-    bounds = difference.getbbox()
+    white_pixels = difference.point(lambda value: 255 if value <= 10 else 0)
+    outside_background = white_pixels.copy()
+    for corner in (
+        (0, 0),
+        (image.width - 1, 0),
+        (0, image.height - 1),
+        (image.width - 1, image.height - 1),
+    ):
+        ImageDraw.floodfill(outside_background, corner, 0)
+    opaque_ink = ImageOps.invert(white_pixels)
+    alpha = ImageChops.lighter(outside_background, opaque_ink)
+    bounds = alpha.getbbox()
     if bounds:
         padding = max(8, round(min(image.size) * 0.015))
         left, top, right, bottom = bounds
@@ -47,6 +57,9 @@ def cropped_image_reader(image_path: Path) -> ImageReader:
             min(image.height, bottom + padding),
         )
         image = image.crop(bounds)
+        alpha = alpha.crop(bounds)
+    image = image.convert("RGBA")
+    image.putalpha(alpha)
     buffer = BytesIO()
     image.save(buffer, format="PNG")
     buffer.seek(0)
@@ -71,7 +84,7 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
         height=image_size,
         preserveAspectRatio=True,
         anchor="c",
-        mask=[245, 255, 245, 255, 245, 255],
+        mask="auto",
     )
 
     word_width = pdfmetrics.stringWidth(animal, "EduSABeginner-Regular", 34)
