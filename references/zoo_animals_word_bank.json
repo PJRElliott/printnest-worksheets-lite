@@ -1,0 +1,22 @@
+{
+  "title": "Zoo Animals",
+  "locale": "en-GB",
+  "audience": {
+    "stages": ["EYFS", "KS1"],
+    "approximate_ages": "4-7"
+  },
+  "curriculum_note": "A practical vocabulary selection supporting the naming of animals and mammals; it is not a statutory species checklist.",
+  "words": [
+    { "word": "elephant", "class": "mammal", "asset": "assets/zoo-animals-pencil/elephant.png" },
+    { "word": "giraffe", "class": "mammal", "asset": "assets/zoo-animals-pencil/giraffe.png" },
+    { "word": "lion", "class": "mammal", "asset": "assets/zoo-animals-pencil/lion.png" },
+    { "word": "monkey", "class": "mammal", "asset": "assets/zoo-animals-pencil/monkey.png" },
+    { "word": "panda", "class": "mammal", "asset": "assets/zoo-animals-pencil/panda.png" },
+    { "word": "tiger", "class": "mammal", "asset": "assets/zoo-animals-pencil/tiger.png" },
+    { "word": "zebra", "class": "mammal", "asset": "assets/zoo-animals-pencil/zebra.png" }
+  ],
+  "sources": [
+    "https://www.gov.uk/government/publications/national-curriculum-in-england-science-programmes-of-study/national-curriculum-in-england-science-programmes-of-study",
+    "https://www.gov.uk/government/publications/development-matters--2/development-matters"
+  ]
+}
