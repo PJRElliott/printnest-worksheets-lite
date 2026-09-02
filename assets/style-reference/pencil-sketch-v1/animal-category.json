@@ -1,0 +1,52 @@
+{
+  "category": "animals",
+  "style_id": "pencil-sketch-v1",
+  "status": "locked-approved-standard",
+  "approved_exemplar": {
+    "file": "../../zoo-animals-pencil/gorilla.png",
+    "sha256": "9f7a95fcbe21f8c7a1e5c551e71dd0861dc22179349fc2f8d0d11fbfb2fb58ae",
+    "approval": "User approved the simplified drawing style; checkerboard background was removed deterministically without redrawing the animal."
+  },
+  "references": [
+    "global-texture-zoo-scene.png",
+    "global-side-zebra.png",
+    "global-three-quarter-lion.png"
+  ],
+  "composition": {
+    "subjects": 1,
+    "view": "use the clearest natural view for the species",
+    "framing": "close, centred, complete full body with no cropping",
+    "background": "transparent outside the animal",
+    "ground_or_shadow": false,
+    "decorations": false
+  },
+  "rendering": {
+    "medium": "traditional coloured-pencil sketch",
+    "outline": "fine, slightly uneven navy pencil contour",
+    "texture": "light visible pencil grain, sparse short contour marks, and very limited delicate cross-hatching",
+    "colour": "softly layered and restrained",
+    "proportions": "friendly, simplified, natural, and recognisable without anatomical over-detail"
+  },
+  "prohibited": [
+    "kawaii",
+    "chibi",
+    "oversized eyes",
+    "smooth vector lines",
+    "clipart",
+    "glossy fills",
+    "digital gradients",
+    "3D rendering",
+    "realistic rendering",
+    "photorealism",
+    "text",
+    "labels",
+    "borders",
+    "scenery",
+    "plants",
+    "dashed paths",
+    "stars",
+    "motion marks",
+    "extra objects",
+    "other animals"
+  ]
+}

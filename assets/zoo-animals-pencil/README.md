@@ -6,6 +6,7 @@ Reusable illustrations for early-years and KS1 trace-and-write worksheets.
 
 - elephant
 - giraffe
+- gorilla
 - lion
 - monkey
 - panda
@@ -19,7 +20,7 @@ Reusable illustrations for early-years and KS1 trace-and-write worksheets.
 - Retain delicate cross-hatching, short texture marks, and softly layered pencil fills.
 - Use muted gold, warm white, navy, and natural soft grey where appropriate.
 - Keep proportions friendly and recognisable without kawaii, chibi, vector, realistic, or photorealistic styling.
-- Isolate one complete animal on white with no text, border, scenery, plants, decorations, or other animals.
+- Isolate one complete animal on a transparent external background with no text, border, scenery, plants, decorations, or other animals.
 
 Primary colours: navy `#193A63`, muted gold `#E1AE43`, warm white `#FFF9EC`.
 
@@ -32,4 +33,3 @@ vocabulary for animals and the natural world.
 
 - [National curriculum in England: science programmes of study](https://www.gov.uk/government/publications/national-curriculum-in-england-science-programmes-of-study/national-curriculum-in-england-science-programmes-of-study)
 - [Development Matters](https://www.gov.uk/government/publications/development-matters--2/development-matters)
-

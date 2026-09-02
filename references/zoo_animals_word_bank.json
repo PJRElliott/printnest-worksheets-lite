@@ -9,6 +9,7 @@
   "words": [
     { "word": "elephant", "class": "mammal", "asset": "assets/zoo-animals-pencil/elephant.png" },
     { "word": "giraffe", "class": "mammal", "asset": "assets/zoo-animals-pencil/giraffe.png" },
+    { "word": "gorilla", "class": "mammal", "asset": "assets/zoo-animals-pencil/gorilla.png" },
     { "word": "lion", "class": "mammal", "asset": "assets/zoo-animals-pencil/lion.png" },
     { "word": "monkey", "class": "mammal", "asset": "assets/zoo-animals-pencil/monkey.png" },
     { "word": "panda", "class": "mammal", "asset": "assets/zoo-animals-pencil/panda.png" },
