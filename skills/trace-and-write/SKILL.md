@@ -17,7 +17,7 @@ python scripts/generate_trace_and_write.py
 - Begin every generated PDF with the bundled instruction-page layout. Keep the directions brief, child-friendly, and applicable to words of different lengths. Show two grey model words, those words traced in black, and an example of continuing the word with clear finger spaces. Tell learners to repeat the word only as many times as fit comfortably.
 - Treat `assets/canonical_instruction_page.pdf` as the locked instruction page. Generate a first-page placeholder, then use `insert_canonical_instruction_page()` after saving so every workbook receives that exact PDF page instead of rebuilding it.
 - Preserve the bundled full-page template. Use League Spartan for headings and instructions, and Edu SA Beginner only for the grey tracing words.
-- When adding illustrations, use a consistent child-friendly clipart style from the approved asset source. Never use kawaii, realistic, or photorealistic imagery.
+- When adding illustrations, use only consistent black-and-white line art from the approved asset source. Do not use colour, grayscale rendering, kawaii, realistic, or photorealistic imagery.
 - Show each family word exactly once with no repetition. Use one strip per unique word and continue families longer than ten words onto another page.
 - Pack complete family sections into unused page space by default. A following section includes its own title, instruction, and strips; start a new page when the complete section will not fit within the ten-position capacity.
 - Identify each section with a left-aligned `-ab Family Words` title, substituting the actual family ending. Do not include `Trace and Write` in the title.
