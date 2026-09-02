@@ -53,8 +53,8 @@
   },
   "background_workflow": {
     "generation_pass": "Generate against chroma green, remove the connected exterior green during the same production pass, and verify a real alpha channel before review.",
-    "review_copy": "Present the transparent RGBA candidate for approval; do not normally present or retain the green intermediate.",
-    "final_copy": "Save the approved worksheet asset as RGBA with genuine exterior transparency.",
+    "promotion": "Do not request user approval. Self-check the transparent RGBA candidate against the locked references and rules, correct or regenerate failures, and promote passing assets automatically.",
+    "final_copy": "Save the promoted worksheet asset as RGBA with genuine exterior transparency.",
     "preservation": "Keep enclosed white and light areas inside the animal opaque; remove only the connected exterior background."
   },
   "prohibited": [
