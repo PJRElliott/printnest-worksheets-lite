@@ -2,11 +2,19 @@
   "category": "animals",
   "style_id": "pencil-sketch-v1",
   "status": "locked-approved-standard",
-  "approved_exemplar": {
-    "file": "../../zoo-animals-pencil/gorilla.png",
-    "sha256": "9f7a95fcbe21f8c7a1e5c551e71dd0861dc22179349fc2f8d0d11fbfb2fb58ae",
-    "approval": "User approved the simplified drawing style; checkerboard background was removed deterministically without redrawing the animal."
-  },
+  "approved_exemplars": [
+    {
+      "file": "../../zoo-animals-pencil/gorilla.png",
+      "role": "upright mammal simplification reference",
+      "sha256": "9f7a95fcbe21f8c7a1e5c551e71dd0861dc22179349fc2f8d0d11fbfb2fb58ae"
+    },
+    {
+      "file": "../../zoo-animals-pencil/crocodile.png",
+      "role": "long, low animal simplification reference",
+      "sha256": "86c933bc4b41c02f034f3f62e69f4474d6f5bafa85c03e9e8f251cca0f7285c0"
+    }
+  ],
+  "approval_note": "The user approved both drawing styles; baked checkerboard backgrounds were removed deterministically without redrawing the animals.",
   "references": [
     "global-texture-zoo-scene.png",
     "global-side-zebra.png",

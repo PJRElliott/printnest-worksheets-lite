@@ -5,8 +5,9 @@
     "stages": ["EYFS", "KS1"],
     "approximate_ages": "4-7"
   },
-  "curriculum_note": "A practical vocabulary selection supporting the naming of animals and mammals; it is not a statutory species checklist.",
+  "curriculum_note": "A practical vocabulary selection supporting the naming and classification of animals, including mammals and reptiles; it is not a statutory species checklist.",
   "words": [
+    { "word": "crocodile", "class": "reptile", "asset": "assets/zoo-animals-pencil/crocodile.png" },
     { "word": "elephant", "class": "mammal", "asset": "assets/zoo-animals-pencil/elephant.png" },
     { "word": "giraffe", "class": "mammal", "asset": "assets/zoo-animals-pencil/giraffe.png" },
     { "word": "gorilla", "class": "mammal", "asset": "assets/zoo-animals-pencil/gorilla.png" },

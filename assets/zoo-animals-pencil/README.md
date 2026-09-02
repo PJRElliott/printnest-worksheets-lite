@@ -4,6 +4,7 @@ Reusable illustrations for early-years and KS1 trace-and-write worksheets.
 
 ## Animals
 
+- crocodile
 - elephant
 - giraffe
 - gorilla
