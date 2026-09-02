@@ -1,0 +1,30 @@
+{
+  "style_id": "pencil-sketch-v1",
+  "status": "locked",
+  "approved_by_user": true,
+  "anchors": [
+    {
+      "file": "global-side-zebra.png",
+      "role": "side-view animal structure and stripe detail",
+      "sha256": "ebb090c00d8729874c650b0ef5a01424e8a378a73a99d9b26a2460f0740e8481"
+    },
+    {
+      "file": "global-three-quarter-lion.png",
+      "role": "three-quarter animal proportions and coloured-pencil rendering",
+      "sha256": "f9ffca07bac061d4937a6e1038d2c09baffd8b699f6bdb1f8f002c5bd823dd46"
+    },
+    {
+      "file": "global-texture-zoo-scene.png",
+      "role": "master palette, pencil texture, contour, hatching, and overall visual character",
+      "sha256": "f20b79b0c4003fb0af03fbdbed863bc36346539ffae36c3cd52fc9d9ed9c59da"
+    }
+  ],
+  "usage": {
+    "reference_order": [
+      "global-texture-zoo-scene.png",
+      "global-side-zebra.png",
+      "global-three-quarter-lion.png"
+    ],
+    "rule": "Use these unchanged masters as style references. Never replace an anchor with an unapproved generated image."
+  }
+}
