@@ -63,19 +63,6 @@ def draw_illustrated_strip(pdf: canvas.Canvas, generator, baseline: float, anima
     image_x = generator.CONTENT_LEFT + 0.03 * inch
     image_y = baseline - generator.TRACE_BOTTOM_EXTENT
     first_x = generator.CONTENT_LEFT + 0.85 * inch
-    background_bleed = 0.02 * inch
-    pdf.saveState()
-    pdf.setFillColorRGB(1, 1, 1)
-    pdf.setStrokeColorRGB(1, 1, 1)
-    pdf.rect(
-        generator.CONTENT_LEFT - background_bleed,
-        image_y - background_bleed,
-        first_x - generator.CONTENT_LEFT + background_bleed,
-        image_size + 2 * background_bleed,
-        fill=1,
-        stroke=0,
-    )
-    pdf.restoreState()
     pdf.drawImage(
         cropped_image_reader(image_path),
         image_x,
